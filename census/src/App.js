@@ -1,26 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './App.css';
 
 import logo from './logo.png'   // https://pixabay.com/p-294173/?no_redirect
 import { Grid, Row, Col, Image, Jumbotron } from 'react-bootstrap';
-import CensusForm from './components/censusForm/CensusForm.js'
-
-import ApiClient from './services/ApiClient';
-import SubmitCensusCommand from './services/SubmitCensusCommand'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import CensusDataEntryPage from './pages/CensusDataEntryPage';
+import SubmittedPage from './pages/SubmittedPage';
 
 class App extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.submit = this.submit.bind(this);
-    }
-
-    async submit(census) {
-        var command = new SubmitCensusCommand(census);
-        await this.props.apiClient.send(command);
-    }
 
     render() {
         return (
@@ -52,7 +39,13 @@ class App extends Component {
                     <Col>
                     </Col>
                     <Col>
-                        <CensusForm submit={this.submit} />
+                        <Router>
+                            <div>
+                                <Route exact path="/" component={CensusDataEntryPage} />
+                                <Route exact path="/submitted" component={SubmittedPage} />
+                            </div>
+                        </Router>
+
                     </Col>
                 </Row>
 
@@ -62,7 +55,6 @@ class App extends Component {
 }
 
 App.propTypes = {
-    apiClient: PropTypes.instanceOf(ApiClient).isRequired
 };
 
 export default App;

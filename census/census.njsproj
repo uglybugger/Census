@@ -41,6 +41,7 @@
     <Folder Include="src\components\" />
     <Folder Include="src\components\censusForm\" />
     <Folder Include="src\molecules\" />
+    <Folder Include="src\pages\" />
     <Folder Include="src\services\" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +53,8 @@
     <Compile Include="src\molecules\Question.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\pages\SubmittedPage.js" />
+    <Compile Include="src\pages\CensusDataEntryPage.js" />
     <Compile Include="src\services\ApiClient.js">
       <SubType>Code</SubType>
     </Compile>
