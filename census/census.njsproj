@@ -23,17 +23,31 @@
     <Content Include="public\index.html" />
     <Content Include="public\favicon.ico" />
     <Content Include="public\manifest.json" />
-    <Content Include="src\App.css" />
+    <Content Include="src\App.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\index.css" />
-    <Content Include="src\logo.svg" />
     <Content Include="src\App.js" />
     <Content Include="src\App.test.js" />
     <Content Include="src\index.js" />
-    <Content Include="src\serviceWorker.js" />
+    <Content Include="src\molecules\Question.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\" />
     <Folder Include="src\" />
+    <Folder Include="src\components\" />
+    <Folder Include="src\components\censusForm\" />
+    <Folder Include="src\molecules\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\molecules\BeardLengthQuestion.js" />
+    <Compile Include="src\molecules\GearInchesQuestion.js" />
+    <Compile Include="src\components\censusForm\CensusForm.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\molecules\Question.js">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
