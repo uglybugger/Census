@@ -33,29 +33,24 @@ class CensusForm extends Component {
 
     render() {
         return (
-            <div className="row">
-                < div className="col-sm-4" >
-                </div >
-                <div className="col-sm-4" >
-                    <form>
-                        <BeardLengthQuestion
-                            answer={this.state.submission.beardLength}
-                            onAnswerChanged={this.handleAnswerChanged}
-                        />
+            <div>
+                <form>
+                    <BeardLengthQuestion
+                        answer={this.state.submission.beardLength}
+                        onAnswerChanged={this.handleAnswerChanged}
+                    />
 
-                        <GearInchesQuestion
-                            answer={this.state.submission.gearInches}
-                            onAnswerChanged={this.handleAnswerChanged}
-                        />
+                    <GearInchesQuestion
+                        answer={this.state.submission.gearInches}
+                        onAnswerChanged={this.handleAnswerChanged}
+                    />
 
-                        <Button bsStyle="primary">Submit my census</Button>
-                    </form>
-                </div >
-
-                <div className="col-sm-4" >
+                    <Button bsStyle="primary">Submit my census</Button>
+                </form>
+                <div>
                     {JSON.stringify(this.state)}
                 </div>
-            </div >
+            </div>
         );
     }
 }

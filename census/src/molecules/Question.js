@@ -41,6 +41,7 @@ class Question extends Component {
             <div className="row">
                 <div className="col-sm-12">
                     <FormGroup
+                        controlId={this.props.fieldName}
                         validationState={this.state.validation.state}
                     >
                         <ControlLabel>{this.props.question}</ControlLabel>
