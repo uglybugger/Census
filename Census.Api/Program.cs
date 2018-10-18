@@ -7,6 +7,8 @@ namespace Census.Api
     {
         public static void Main(string[] args)
         {
+            //LogBootstrapper.Bootstrap(); //TODO up to here
+
             var builder = CreateWebHostBuilder(args);
             var webHost = builder.Build();
             webHost.Run();
