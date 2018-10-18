@@ -13,6 +13,8 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
+    <StartWebBrowser>True</StartWebBrowser>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -39,6 +41,7 @@
     <Folder Include="src\components\" />
     <Folder Include="src\components\censusForm\" />
     <Folder Include="src\molecules\" />
+    <Folder Include="src\services\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\molecules\BeardLengthQuestion.js" />
@@ -47,6 +50,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="src\molecules\Question.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\services\ApiClient.js">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\services\SubmitCensusCommand.js">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

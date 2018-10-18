@@ -1,4 +1,5 @@
-﻿import React, { Component } from "react";
+﻿import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import GearInchesQuestion from '../../molecules/GearInchesQuestion'
 import BeardLengthQuestion from '../../molecules/BeardLengthQuestion'
@@ -27,8 +28,8 @@ class CensusForm extends Component {
         });
     }
 
-    handleSubmit(event) {
-
+    handleSubmit(e) {
+        this.props.submit(this.state.submission);
     }
 
     render() {
@@ -45,7 +46,7 @@ class CensusForm extends Component {
                         onAnswerChanged={this.handleAnswerChanged}
                     />
 
-                    <Button bsStyle="primary">Submit my census</Button>
+                    <Button bsStyle="primary" onClick={this.handleSubmit}>Submit my census</Button>
                 </form>
                 <div>
                     {JSON.stringify(this.state)}
@@ -54,5 +55,9 @@ class CensusForm extends Component {
         );
     }
 }
+
+CensusForm.propTypes = {
+    submit: PropTypes.func.isRequired
+};
 
 export default CensusForm;
