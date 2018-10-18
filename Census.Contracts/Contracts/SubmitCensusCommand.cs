@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Census.Api.Domain;
+using Census.Contracts.HttpRequestRouting.Attributes;
 
-namespace Census.Api.Contracts
+namespace Census.Contracts.Contracts
 {
+    [Post(RouteTemplate)]
     public class SubmitCensusCommand : ICommand
     {
         public const string RouteTemplate = "api/census/submit";

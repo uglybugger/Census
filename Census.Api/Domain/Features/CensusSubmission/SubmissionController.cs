@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Census.Api.Contracts;
+using Census.Contracts.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Census.Api.Domain.Features.CensusSubmission
@@ -10,7 +10,9 @@ namespace Census.Api.Domain.Features.CensusSubmission
         [Route(SubmitCensusCommand.RouteTemplate)]
         public async Task<IActionResult> Submit(SubmitCensusCommand command)
         {
-            return Content("Hello, world!");
+            var handler = new SubmitCensusCommandHandler();
+            await handler.Handle(command);
+            return new EmptyResult();
         }
     }
 }

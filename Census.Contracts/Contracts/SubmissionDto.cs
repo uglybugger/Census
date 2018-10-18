@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Census.Api.Validation;
+using Census.Contracts.Validation.Attributes;
 
-namespace Census.Api.Contracts
+namespace Census.Contracts.Contracts
 {
     public class SubmissionDto
     {

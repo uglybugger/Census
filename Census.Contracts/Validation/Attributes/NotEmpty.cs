@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Census.Api.Validation
+namespace Census.Contracts.Validation.Attributes
 {
     public class NotEmpty : ValidationAttribute
     {

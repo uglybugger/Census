@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Validation\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -12,6 +13,10 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.6" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Swashbuckle.AspnetCore" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Census.Contracts\Census.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

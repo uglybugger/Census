@@ -1,4 +1,4 @@
-﻿namespace Census.Api.Domain
+﻿namespace Census.Contracts
 {
     public interface ICommand
     {
