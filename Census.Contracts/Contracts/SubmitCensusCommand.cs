@@ -9,6 +9,6 @@ namespace Census.Contracts.Contracts
         public const string RouteTemplate = "api/census/submit";
 
         [Required]
-        public SubmissionDto Submission { get; set; }
+        public CompletedCensusDto CompletedCensus { get; set; }
     }
 }

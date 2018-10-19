@@ -1,6 +1,6 @@
 ﻿namespace Census.Api.Bff.Logging
 {
-    public class MessageTemplate
+    public class MessageTemplateDto
     {
         public string Raw { get; set; }
         public object[] Tokens { get; set; }

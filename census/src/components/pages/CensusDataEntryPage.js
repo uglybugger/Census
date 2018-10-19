@@ -1,10 +1,10 @@
 ﻿import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import CensusForm from '../components/censusForm/CensusForm'
+import CensusForm from '../organisms/CensusForm'
 
-import ApiClient from '../infrastructure/api/ApiClient';
-import SubmitCensusCommand from '../services/SubmitCensusCommand'
+import ApiClient from '../../infrastructure/api/ApiClient';
+import SubmitCensusCommand from '../../services/SubmitCensusCommand'
 
 class CensusDataEntryPage extends Component {
 
@@ -18,7 +18,7 @@ class CensusDataEntryPage extends Component {
     async submit(census) {
         var command = new SubmitCensusCommand(census);
         await this.apiClient.send(command);
-        this.props.history.push("/submitted");
+        setTimeout(() => this.props.history.push("/submitted"), 0);
     }
 
     render() {

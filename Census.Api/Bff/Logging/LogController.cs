@@ -4,7 +4,8 @@ using Serilog.Events;
 
 namespace Census.Api.Bff.Logging
 {
-    public class LogController : Controller
+    [ApiController]
+    public class LogController : ControllerBase
     {
         private readonly ILogger _logger;
 

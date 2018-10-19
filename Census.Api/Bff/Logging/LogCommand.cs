@@ -6,6 +6,6 @@ namespace Census.Api.Bff.Logging
     {
         public const string RouteTemplate = "bff/log";
 
-        public LogEvent[] LogEvents { get; set; }
+        public LogEventDto[] LogEvents { get; set; }
     }
 }

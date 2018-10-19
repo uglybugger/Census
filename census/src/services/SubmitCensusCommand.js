@@ -1,7 +1,7 @@
 ﻿class SubmitCensusCommand {
 
-    constructor(submission) {
-        this.Submission = submission;
+    constructor(completedCensus) {
+        this.CompletedCensus = completedCensus;
     }
 
     get route() {

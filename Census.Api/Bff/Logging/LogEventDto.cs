@@ -2,10 +2,10 @@
 
 namespace Census.Api.Bff.Logging
 {
-    public class LogEvent
+    public class LogEventDto
     {
         public DateTimeOffset Timestamp { get; set; }
         public StructuredLogLevel Level { get; set; }
-        public MessageTemplate MessageTemplate { get; set; }
+        public MessageTemplateDto MessageTemplate { get; set; }
     }
 }

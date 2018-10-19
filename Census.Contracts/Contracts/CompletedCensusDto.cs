@@ -4,13 +4,14 @@ using Census.Contracts.Validation.Attributes;
 
 namespace Census.Contracts.Contracts
 {
-    public class SubmissionDto
+    public class CompletedCensusDto
     {
         [Required]
         [NotEmpty]
         public Guid Id { get; set; }
 
         [Required]
-        public string Token { get; set; }
+        [MagicCensusToken]
+        public string AccessToken { get; set; }
     }
 }

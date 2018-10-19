@@ -17,13 +17,13 @@ namespace Census.Api.Infrastructure.Logging
 
             if (IsFrom<ControllerActionInvoker>(logEvent))
             {
-                _logLevelBackingField.SetValue(logEvent, LogEventLevel.Debug);
+                _logLevelBackingField.SetValue(logEvent, LogEventLevel.Verbose);
                 return;
             }
 
             if (IsFrom<ContentResultExecutor>(logEvent))
             {
-                _logLevelBackingField.SetValue(logEvent, LogEventLevel.Debug);
+                _logLevelBackingField.SetValue(logEvent, LogEventLevel.Verbose);
             }
         }
 

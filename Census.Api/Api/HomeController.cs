@@ -1,13 +1,14 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Census.Api.Controllers
+namespace Census.Api.Api
 {
-    public class HomeController : Controller
+    [ApiController]
+    public class HomeController : ControllerBase
     {
         [Route("")]
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public Task<IActionResult> Index()
         {
             var response = new ContentResult
             {
@@ -15,7 +16,7 @@ namespace Census.Api.Controllers
                 ContentType = "text/plain"
             };
 
-            return response;
+            return Task.FromResult((IActionResult) response);
         }
     }
 }

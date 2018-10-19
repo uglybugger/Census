@@ -1,8 +1,10 @@
 ﻿import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import GearInchesQuestion from '../../molecules/GearInchesQuestion'
-import BeardLengthQuestion from '../../molecules/BeardLengthQuestion'
+import uuid from 'uuid';
+import AccessTokenQuestion from '../molecules/AccessTokenQuestion';
+import GearInchesQuestion from '../molecules/GearInchesQuestion';
+import BeardLengthQuestion from '../molecules/BeardLengthQuestion';
 
 class CensusForm extends Component {
 
@@ -10,13 +12,17 @@ class CensusForm extends Component {
         super(props);
 
         this.state = {
+            isLoading: false,
             submission: {
+                id: uuid(),
+                accessToken: '13a7-7f24-0000-0009',
                 beardLength: 0,
                 gearInches: 120
             }
         };
 
         this.handleAnswerChanged = this.handleAnswerChanged.bind(this);
+        this.canSubmit = this.canSubmit.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -28,14 +34,28 @@ class CensusForm extends Component {
         });
     }
 
-    handleSubmit(e) {
-        this.props.submit(this.state.submission);
+    canSubmit() {
+        return !this.state.isLoading;
+    }
+
+    async handleSubmit(e) {
+        try {
+            this.setState({ isLoading: true });
+            await this.props.submit(this.state.submission);
+        } finally {
+            this.setState({ isLoading: false });
+        }
     }
 
     render() {
         return (
             <div>
                 <form>
+                    <AccessTokenQuestion
+                        answer={this.state.submission.accessToken}
+                        onAnswerChanged={this.handleAnswerChanged}
+                    />
+
                     <BeardLengthQuestion
                         answer={this.state.submission.beardLength}
                         onAnswerChanged={this.handleAnswerChanged}
@@ -46,7 +66,7 @@ class CensusForm extends Component {
                         onAnswerChanged={this.handleAnswerChanged}
                     />
 
-                    <Button bsStyle="primary" onClick={this.handleSubmit}>Submit my census</Button>
+                    <Button bsStyle="primary" onClick={this.canSubmit() ? this.handleSubmit : null} disabled={!this.canSubmit()}>Submit my census</Button>
                 </form>
                 <div>
                     {JSON.stringify(this.state)}

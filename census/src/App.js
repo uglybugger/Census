@@ -4,8 +4,9 @@ import './App.css';
 import logo from './logo.png'   // https://pixabay.com/p-294173/?no_redirect
 import { Grid, Row, Col, Image, Jumbotron } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import CensusDataEntryPage from './pages/CensusDataEntryPage';
-import SubmittedPage from './pages/SubmittedPage';
+import CensusDataEntryPage from './components/pages/CensusDataEntryPage';
+import SubmittedPage from './components/pages/SubmittedPage';
+import WelcomePage from './components/pages/WelcomePage';
 
 class App extends Component {
 
@@ -41,7 +42,8 @@ class App extends Component {
                     <Col>
                         <Router>
                             <div>
-                                <Route exact path="/" component={CensusDataEntryPage} />
+                                <Route exact path="/" component={WelcomePage} />
+                                <Route exact path="/data-entry" component={CensusDataEntryPage} />
                                 <Route exact path="/submitted" component={SubmittedPage} />
                             </div>
                         </Router>

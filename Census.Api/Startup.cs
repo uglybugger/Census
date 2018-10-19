@@ -1,6 +1,7 @@
 ﻿using System;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Census.Api.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,9 +28,17 @@ namespace Census.Api
             services.AddCors();
 
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .SetCompatibilityVersion(CompatibilityVersion.Latest)
                 .AddControllersAsServices()
                 ;
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressConsumesConstraintForFormFileParameters = true;
+                options.SuppressInferBindingSourcesForParameters = false;
+                options.SuppressModelStateInvalidFilter = false;
+                options.InvalidModelStateResponseFactory = InvalidModelStateResponseFactory.CreateResponse;
+            });
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "Hipster Census API", Version = "v1"}); });
 
@@ -49,7 +58,7 @@ namespace Census.Api
                 .WithOrigins("http://localhost:3000")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
-                .SetPreflightMaxAge(TimeSpan.FromSeconds(1))
+                .SetPreflightMaxAge(TimeSpan.FromMinutes(1))
             );
 
             app.UseMvc();

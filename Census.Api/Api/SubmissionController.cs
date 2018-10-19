@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Census.Api.Api
 {
-    public class SubmissionController : Controller
+    [ApiController]
+    public class SubmissionController : ControllerBase
     {
         [HttpPost]
         [Route(SubmitCensusCommand.RouteTemplate)]

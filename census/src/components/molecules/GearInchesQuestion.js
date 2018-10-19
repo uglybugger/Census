@@ -32,7 +32,7 @@ class GearInchesQuestion extends Component {
 
 GearInchesQuestion.propTypes = {
     onAnswerChanged: PropTypes.func.isRequired,
-    answer: PropTypes.number
+    answer: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
 };
 
 
