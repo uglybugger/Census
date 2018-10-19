@@ -21,9 +21,9 @@
   <ItemGroup>
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
+    <Content Include="public\favicon.png" />
     <Content Include="README.md" />
     <Content Include="public\index.html" />
-    <Content Include="public\favicon.ico" />
     <Content Include="public\manifest.json" />
     <Content Include="src\App.css">
       <SubType>Code</SubType>
@@ -40,11 +40,16 @@
     <Folder Include="src\" />
     <Folder Include="src\components\" />
     <Folder Include="src\components\censusForm\" />
+    <Folder Include="src\infrastructure\logging\" />
+    <Folder Include="src\infrastructure\api\" />
     <Folder Include="src\molecules\" />
+    <Folder Include="src\infrastructure\" />
     <Folder Include="src\pages\" />
     <Folder Include="src\services\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\infrastructure\logging\ApiSink.js" />
+    <Compile Include="src\infrastructure\logging\LogBootstrapper.js" />
     <Compile Include="src\molecules\BeardLengthQuestion.js" />
     <Compile Include="src\molecules\GearInchesQuestion.js" />
     <Compile Include="src\components\censusForm\CensusForm.js">
@@ -55,9 +60,10 @@
     </Compile>
     <Compile Include="src\pages\SubmittedPage.js" />
     <Compile Include="src\pages\CensusDataEntryPage.js" />
-    <Compile Include="src\services\ApiClient.js">
+    <Compile Include="src\infrastructure\api\ApiClient.js">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="src\services\LogCommand.js" />
     <Compile Include="src\services\SubmitCensusCommand.js">
       <SubType>Code</SubType>
     </Compile>

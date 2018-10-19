@@ -1,7 +1,11 @@
-﻿import uuid from 'uuid';
-import axios from 'axios';
+﻿import uuid from "uuid";
+import axios from "axios";
 
 class ApiClient {
+    constructor() {
+        this.send = this.send.bind(this);
+    }
+
     async send(dto) {
         const baseUrl = "http://localhost:61155/";
 

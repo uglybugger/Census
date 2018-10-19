@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
+using Census.Api.Domain.Features.CensusSubmission;
 using Census.Contracts.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Census.Api.Domain.Features.CensusSubmission
+namespace Census.Api.Api
 {
     public class SubmissionController : Controller
     {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import CensusForm from '../components/censusForm/CensusForm'
 
-import ApiClient from '../services/ApiClient';
+import ApiClient from '../infrastructure/api/ApiClient';
 import SubmitCensusCommand from '../services/SubmitCensusCommand'
 
 class CensusDataEntryPage extends Component {
