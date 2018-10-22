@@ -1,11 +1,7 @@
-﻿import ApiSink from './ApiSink';
-const structuredLog = require('structured-log');
+﻿const StructuredLog = require('structured-log');
+const SeqSink = require('structured-log-seq-sink')
 
 class LogBootstrapper {
-
-    constructor(apiClient) {
-        this.apiClient = apiClient;
-    }
 
     bootstrap() {
         this.undecoratedConsole = {
@@ -16,12 +12,25 @@ class LogBootstrapper {
             error: console.error
         };
 
-        var consoleSink = new structuredLog.ConsoleSink({ console: this.undecoratedConsole, includeTimestamps: true });
-        var apiSink = new ApiSink(this.apiClient);
+        var levelSwitch = new StructuredLog.DynamicLevelSwitch("verbose")
 
-        var logger = structuredLog.configure()
+        var consoleSink = new StructuredLog.ConsoleSink({ console: this.undecoratedConsole, includeTimestamps: true });
+
+        var seqSink = new SeqSink({
+            url: "http://localhost:5341",
+            apiKey: "",
+            levelSwitch: levelSwitch,
+            durable: true
+        });
+
+        var logger = StructuredLog.configure()
+            .enrich({
+                "ApplicationName": "Hipster Census React",
+                "ApplicationVersion": "1.0.0.0",
+                "ProcessName": "react"
+            })
             .writeTo(consoleSink)
-            .writeTo(apiSink)
+            .writeTo(seqSink)
             .create();
 
         console.log = logger.debug.bind(logger);

@@ -11,6 +11,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
     "structured-log": "^0.2.0",
+    "structured-log-seq-sink": "^0.4.1",
     "uuid": "^3.3.2"
   },
   "scripts": {
