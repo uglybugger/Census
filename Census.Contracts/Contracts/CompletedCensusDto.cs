@@ -13,5 +13,13 @@ namespace Census.Contracts.Contracts
         [Required]
         [MagicCensusToken]
         public string AccessToken { get; set; }
+
+        [Required]
+        [Range(1, 300)]
+        public int BeardLength { get; set; }
+
+        [Required]
+        [Range(100, 200)]
+        public int GearInches { get; set; }
     }
 }
