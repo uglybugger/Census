@@ -1,4 +1,4 @@
-﻿namespace Census.Api.Infrastructure
+﻿namespace Census.Api.Infrastructure.Validation
 {
     public class ErrorResponse
     {

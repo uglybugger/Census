@@ -1,5 +1,7 @@
 ﻿using System;
-using Microsoft.AspNetCore;
+using Census.Api.Infrastructure.Configuration;
+using Census.Api.Infrastructure.Hosting;
+using Census.Api.Infrastructure.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Serilog;
 
@@ -11,10 +13,10 @@ namespace Census.Api
         {
             try
             {
-                LogBootstrapper.Bootstrap(); //TODO up to here
+                ConfigurationBootstrapper.Bootstrap(args, out var configuration, out var appSettingsRoot);
+                LogBootstrapper.Bootstrap(appSettingsRoot.Application, appSettingsRoot.Logging);
+                WebHostBootstrapper.Bootstrap<Startup>(configuration, out var webHost);
 
-                var builder = CreateWebHostBuilder(args);
-                var webHost = builder.Build();
                 webHost.Run();
             }
             catch (Exception ex)
@@ -29,10 +31,5 @@ namespace Census.Api
 
             return 0;
         }
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .UseSerilog();
     }
 }

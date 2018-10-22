@@ -1,7 +1,8 @@
 ﻿using System;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Census.Api.Infrastructure;
+using Census.Api.AppSettings;
+using Census.Api.Infrastructure.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -13,14 +14,13 @@ namespace Census.Api
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
         private IContainer _container;
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
@@ -28,38 +28,43 @@ namespace Census.Api
             services.AddCors();
 
             services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Latest)
-                .AddControllersAsServices()
+                    .SetCompatibilityVersion(CompatibilityVersion.Latest)
+                    .AddControllersAsServices()
                 ;
 
             services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressConsumesConstraintForFormFileParameters = true;
-                options.SuppressInferBindingSourcesForParameters = false;
-                options.SuppressModelStateInvalidFilter = false;
-                options.InvalidModelStateResponseFactory = InvalidModelStateResponseFactory.CreateResponse;
-            });
+                                                   {
+                                                       options.SuppressConsumesConstraintForFormFileParameters = true;
+                                                       options.SuppressInferBindingSourcesForParameters = false;
+                                                       options.SuppressModelStateInvalidFilter = false;
+                                                       options.InvalidModelStateResponseFactory = InvalidModelStateResponseFactory.CreateResponse;
+                                                   });
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "Hipster Census API", Version = "v1"}); });
 
-            _container = IoC.LetThereBeIoC(services);
+            var appSettingsRoot = _configuration.Get<AppSettingsRoot>();
+            _container = IoC.LetThereBeIoC(services, appSettingsRoot);
             return new AutofacServiceProvider(_container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            var corsSettings = _configuration.Get<AppSettingsRoot>().Hosting.Cors;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder => builder
-                .WithOrigins("http://localhost:3000")
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .SetPreflightMaxAge(TimeSpan.FromMinutes(1))
-            );
+            app.UseCors(builder =>
+                        {
+                            builder
+                                .WithOrigins(corsSettings.AllowedOrigins)
+                                .AllowAnyHeader()
+                                .AllowAnyMethod()
+                                .SetPreflightMaxAge(TimeSpan.FromMinutes(1));
+                        });
 
             app.UseMvc();
 

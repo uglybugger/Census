@@ -11,16 +11,17 @@ namespace Census.Api.AutofacModules
             base.Load(builder);
 
             builder.RegisterType<DocumentClientFactory>()
-                .AsSelf()
-                .SingleInstance();
+                   .AsSelf()
+                   .SingleInstance();
 
             builder.Register(c => c.Resolve<DocumentClientFactory>().Create())
-                .As<DocumentClient>()
-                .SingleInstance();
+                   .As<DocumentClient>()
+                   .SingleInstance()
+                   .AutoActivate();
 
             builder.RegisterGeneric(typeof(CosmosDbRepository<>))
-                .As(typeof(IRepository<>))
-                .InstancePerLifetimeScope();
+                   .As(typeof(IRepository<>))
+                   .InstancePerLifetimeScope();
         }
     }
 }

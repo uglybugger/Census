@@ -2,7 +2,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Census.Api.Infrastructure
+namespace Census.Api.Infrastructure.Validation
 {
     public static class InvalidModelStateResponseFactory
     {
