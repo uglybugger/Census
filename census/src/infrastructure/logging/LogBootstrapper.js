@@ -3,9 +3,14 @@ const StructuredLog = require('structured-log');
 const SeqSink = require('structured-log-seq-sink')
 
 class LogBootstrapper {
+    constructor(configuration) {
+        this.configuration = configuration;
+
+        this.bootstrap = this.bootstrap.bind(this);
+    }
 
     bootstrap() {
-        
+
         this.undecoratedConsole = {
             log: console.log,
             debug: console.debug,
@@ -14,7 +19,7 @@ class LogBootstrapper {
             error: console.error
         };
 
-        var levelSwitch = new StructuredLog.DynamicLevelSwitch("verbose")
+        var levelSwitch = new StructuredLog.DynamicLevelSwitch(this.configuration.Logging.LogEventLevel)
 
         var consoleSink = new StructuredLog.ConsoleSink({
             console: this.undecoratedConsole,
@@ -22,15 +27,15 @@ class LogBootstrapper {
         });
 
         var seqSink = new SeqSink({
-            url: "http://localhost:5341",
-            apiKey: "",
+            url: this.configuration.Logging.Seq.Uri,
+            apiKey: this.configuration.Logging.Seq.ApiKey,
             levelSwitch: levelSwitch
         });
 
         var logger = StructuredLog.configure()
             .enrich({
-                "ApplicationName": "Hipster Census React",
-                "ApplicationVersion": "1.0.0.0",
+                "ApplicationName": this.configuration.Application.Name,
+                "ApplicationVersion": this.configuration.Application.Version,
                 "ProcessName": "react"
             })
             .enrich(new BrowserIdEnricher().enrich)

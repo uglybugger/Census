@@ -2,12 +2,14 @@
 import axios from "axios";
 
 class ApiClient {
-    constructor() {
+    constructor(configuration) {
+        this.configuration = configuration;
+
         this.send = this.send.bind(this);
     }
 
     async send(dto) {
-        const baseUrl = "http://localhost:61155/";
+        const baseUrl = this.configuration.Api.Endpoint;
 
         var request = {
             method: "post",

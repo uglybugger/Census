@@ -7,10 +7,11 @@ import LogBootstrapper from './infrastructure/logging/LogBootstrapper';
 import App from './App';
 import './index.css';
 
-var logBootstrapper = new LogBootstrapper();
-logBootstrapper.bootstrap();
+import configuration from './config.json';
 
-var apiClient = new ApiClient();
+var logBootstrapper = new LogBootstrapper(configuration);
+logBootstrapper.bootstrap();
+var apiClient = new ApiClient(configuration);
 
 var stores = {
     apiClient: apiClient,
@@ -18,7 +19,7 @@ var stores = {
 
 spy((event) => {
     if (event.type === 'action') {
-        console.debug("{event.name} with args: {event.arguments}");
+        console.debug("MobX '{ActionName}' with args: {@EventArguments}", event.name, event.arguments);
     }
 });
 

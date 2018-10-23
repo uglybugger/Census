@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Internal;
 using Serilog.Core;
@@ -24,12 +25,18 @@ namespace Census.Api.Infrastructure.Logging
             if (IsFrom<ContentResultExecutor>(logEvent))
             {
                 _logLevelBackingField.SetValue(logEvent, LogEventLevel.Verbose);
+                return;
+            }
+
+            if (IsFrom<CorsService>(logEvent))
+            {
+                _logLevelBackingField.SetValue(logEvent, LogEventLevel.Verbose);
             }
         }
 
         private static bool IsFrom<T>(LogEvent logEvent)
         {
-            if (!logEvent.Properties.TryGetValue("SourceContext", out LogEventPropertyValue value)) return false;
+            if (!logEvent.Properties.TryGetValue("SourceContext", out var value)) return false;
 
             var scalarValue = value as ScalarValue;
             if (scalarValue == null) return false;
