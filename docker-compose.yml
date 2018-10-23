@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+
+  census-build:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/census-build.Dockerfile
+    image: census-build:latest
+
+  census-test:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/census-test.Dockerfile
+    image: census-test:latest
+    depends_on:
+      - census-build
+
+  census-api:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/census-api.Dockerfile
+    image: census-api:latest
+    depends_on:
+      - census-build
+    expose:
+      - 80
