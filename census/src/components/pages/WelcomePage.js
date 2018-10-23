@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Page from './Page';
 
-class WelcomePage extends Component {
+class WelcomePage extends Page {
     render() {
         return (
             <div>
@@ -18,7 +19,6 @@ class WelcomePage extends Component {
 }
 
 WelcomePage.propTypes = {
-
 };
 
 export default WelcomePage;

@@ -1,23 +1,25 @@
-﻿import React, { Component } from 'react';
+﻿import React from 'react';
 import PropTypes from 'prop-types';
+import { action } from "mobx";
+import { observer, inject } from 'mobx-react';
+import { compose } from 'recompose';
 
-import CensusForm from '../organisms/CensusForm'
-
+import Page from './Page';
+import CensusForm from '../organisms/CensusForm';
 import ApiClient from '../../infrastructure/api/ApiClient';
-import SubmitCensusCommand from '../../services/SubmitCensusCommand'
+import SubmitCensusCommand from '../../services/SubmitCensusCommand';
 
-class CensusDataEntryPage extends Component {
+class CensusDataEntryPage extends Page {
 
     constructor(props) {
         super(props);
 
-        this.submit = this.submit.bind(this);
-        this.apiClient = new ApiClient();
+        this.submit = action(this.submit.bind(this));
     }
 
     async submit(census) {
         var command = new SubmitCensusCommand(census);
-        await this.apiClient.send(command);
+        await this.props.apiClient.send(command);
         setTimeout(() => this.props.history.push("/submitted"), 0);
     }
 
@@ -29,7 +31,7 @@ class CensusDataEntryPage extends Component {
 }
 
 CensusDataEntryPage.propTypes = {
-    history: PropTypes.object.isRequired
+    apiClient: PropTypes.instanceOf(ApiClient).isRequired
 };
 
-export default CensusDataEntryPage;
+export default compose(inject('apiClient'), observer)(CensusDataEntryPage);

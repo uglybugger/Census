@@ -1,14 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-
+import { spy } from 'mobx';
+import { Provider } from 'mobx-react';
+import ApiClient from './infrastructure/api/ApiClient';
 import LogBootstrapper from './infrastructure/logging/LogBootstrapper';
+import App from './App';
+import './index.css';
 
 var logBootstrapper = new LogBootstrapper();
 logBootstrapper.bootstrap();
 
-var rootElement = document.getElementById('root');
-ReactDOM.render(<App />, rootElement);
+var apiClient = new ApiClient();
 
-console.info("Application online");
+var stores = {
+    apiClient: apiClient,
+};
+
+spy((event) => {
+    if (event.type === 'action') {
+        console.debug("{event.name} with args: {event.arguments}");
+    }
+});
+
+var rootElement = document.getElementById('root');
+ReactDOM.render(
+    <Provider {...stores}>
+        <App />
+    </Provider>
+    , rootElement);

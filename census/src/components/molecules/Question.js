@@ -1,6 +1,8 @@
 ﻿import React, { Component } from 'react'
 import { ControlLabel, FormGroup, FormControl, HelpBlock } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { observer } from 'mobx-react';
+import { compose } from 'recompose';
 import './Question.css';
 
 class Question extends Component {
@@ -64,4 +66,4 @@ Question.propTypes = {
     answer: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
 };
 
-export default Question;
+export default compose(observer)(Question);

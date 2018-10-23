@@ -1,9 +1,11 @@
-﻿const StructuredLog = require('structured-log');
+﻿import BrowserIdEnricher from "./BrowserIdEnricher";
+const StructuredLog = require('structured-log');
 const SeqSink = require('structured-log-seq-sink')
 
 class LogBootstrapper {
 
     bootstrap() {
+        
         this.undecoratedConsole = {
             log: console.log,
             debug: console.debug,
@@ -14,13 +16,15 @@ class LogBootstrapper {
 
         var levelSwitch = new StructuredLog.DynamicLevelSwitch("verbose")
 
-        var consoleSink = new StructuredLog.ConsoleSink({ console: this.undecoratedConsole, includeTimestamps: true });
+        var consoleSink = new StructuredLog.ConsoleSink({
+            console: this.undecoratedConsole,
+            includeTimestamps: true,
+        });
 
         var seqSink = new SeqSink({
             url: "http://localhost:5341",
             apiKey: "",
-            levelSwitch: levelSwitch,
-            durable: true
+            levelSwitch: levelSwitch
         });
 
         var logger = StructuredLog.configure()
@@ -29,6 +33,7 @@ class LogBootstrapper {
                 "ApplicationVersion": "1.0.0.0",
                 "ProcessName": "react"
             })
+            .enrich(new BrowserIdEnricher().enrich)
             .writeTo(consoleSink)
             .writeTo(seqSink)
             .create();
@@ -38,6 +43,8 @@ class LogBootstrapper {
         console.info = logger.info.bind(logger);
         console.warn = logger.warn.bind(logger);
         console.error = logger.error.bind(logger);
+
+        console.info("Application online");
     }
 }
 
