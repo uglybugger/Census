@@ -2,19 +2,29 @@ version: "3"
 
 services:
 
-  census-build:
+  census:
     build:
       context: .
-      dockerfile: ./Dockerfiles/census-build.Dockerfile
-    image: census-build:latest
+      dockerfile: ./Dockerfiles/census.Dockerfile
+    image: census:latest
+    expose:
+      - 80
+    ports:
+      - 3001:80
 
-  census-test:
+  census-api-build:
     build:
       context: .
-      dockerfile: ./Dockerfiles/census-test.Dockerfile
-    image: census-test:latest
+      dockerfile: ./Dockerfiles/census-api-build.Dockerfile
+    image: census-api-build:latest
+
+  census-api-test:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/census-api-test.Dockerfile
+    image: census-api-test:latest
     depends_on:
-      - census-build
+      - census-api-build
 
   census-api:
     build:
@@ -22,6 +32,9 @@ services:
       dockerfile: ./Dockerfiles/census-api.Dockerfile
     image: census-api:latest
     depends_on:
-      - census-build
+      - census-api-build
     expose:
       - 80
+    ports:
+      - 3002:80
+

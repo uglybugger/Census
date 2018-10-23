@@ -1,18 +1,13 @@
-FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
-WORKDIR /app
-EXPOSE 80
-
-FROM microsoft/dotnet:2.1-sdk AS build
+FROM node:9.6.1 as build
 WORKDIR /src
-COPY . .
-RUN dotnet restore
-RUN dotnet publish -c Release -o out
+COPY census/ ./
+RUN npm install
 
-# FROM build AS test
-# WORKDIR /src
-# RUN dotnet test
+RUN npm run build
 
-FROM base AS final
-WORKDIR /app
-COPY --from=build /src/Census.Api/out .
-ENTRYPOINT ["dotnet", "Census.Api.dll"]
+FROM nginx:1.13.9-alpine AS base
+
+FROM base AS census
+COPY --from=build /src/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
