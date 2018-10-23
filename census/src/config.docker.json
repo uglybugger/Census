@@ -1,0 +1,17 @@
+{
+    "Application": {
+        "Name": "Hipster Census React",
+        "Version": "${REACT_APP_APPLICATION_VERSION}"
+    },
+    "Api": {
+        "Endpoint": "${REACT_APP_API_ENDPOINT}"
+    },
+    "Logging": {
+        "Environment": "${REACT_APP_LOGGING_ENVIRONMENT}",
+        "LogEventLevel": "Verbose",
+        "Seq": {
+            "Uri": "http://localhost:5341",
+            "ApiKey": "PdmVM9wfHbatOYEMbXEK"
+        }
+    }
+}
