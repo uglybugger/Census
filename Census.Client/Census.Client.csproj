@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Andrew Harcourt</Authors>
+    <Company />
+    <Product>Census</Product>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
