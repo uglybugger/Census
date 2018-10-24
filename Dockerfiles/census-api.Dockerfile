@@ -1,4 +1,4 @@
-FROM census-build:latest AS build
+FROM census-api-build:latest AS build
 
 FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
 WORKDIR /app
