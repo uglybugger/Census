@@ -16,6 +16,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfiles/census-api-build.Dockerfile
+      args:
+        - BUILD_NUMBER
     image: census-api-build:latest
 
   census-api-test:
