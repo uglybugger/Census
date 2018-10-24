@@ -1,6 +1,6 @@
 FROM node:9.6.1 as build
 WORKDIR /src
-COPY census/ ./
+COPY src/census/ ./
 RUN npm install
 
 RUN npm run build
