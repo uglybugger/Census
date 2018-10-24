@@ -2,7 +2,7 @@ FROM microsoft/dotnet:2.1-sdk AS build
 ARG BUILD_NUMBER=0.0.0
 
 WORKDIR /src
-COPY . .
+COPY src .
 
 # Build and pack the packages separately. `nuget pack` is finnicky.
 RUN dotnet build -p:Version=${BUILD_NUMBER} -c Release
