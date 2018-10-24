@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Census.Contracts;
 
 namespace Census.Api.Infrastructure.Mediator
@@ -7,6 +8,6 @@ namespace Census.Api.Infrastructure.Mediator
         where TRequest : IRequest<TRequest, TResponse>
         where TResponse : IResponse
     {
-        Task<TResponse> Handle(TRequest request);
+        Task<TResponse> Handle(IRequest<TRequest, TResponse> request, CancellationToken cancellationToken);
     }
 }

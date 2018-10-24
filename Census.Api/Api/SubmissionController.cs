@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Census.Api.Infrastructure.Mediator;
 using Census.Contracts.Contracts;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,9 @@ namespace Census.Api.Api
 
         [HttpPost]
         [Route(SubmitCensusCommand.RouteTemplate)]
-        public async Task<IActionResult> Submit(SubmitCensusCommand command)
+        public async Task<IActionResult> Submit(SubmitCensusCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(command);
+            await _mediator.Send(command, cancellationToken);
             return new EmptyResult();
         }
     }

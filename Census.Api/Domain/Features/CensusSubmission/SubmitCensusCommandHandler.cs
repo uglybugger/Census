@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Census.Api.Infrastructure.Mediator;
 using Census.Api.Infrastructure.Persistence;
 using Census.Contracts.Contracts;
@@ -16,13 +17,13 @@ namespace Census.Api.Domain.Features.CensusSubmission
             _repository = repository;
         }
 
-        public async Task Handle(SubmitCensusCommand command)
+        public async Task Handle(SubmitCensusCommand command, CancellationToken cancellationToken)
         {
             var dto = command.CompletedCensus;
             var censusForm = new CensusForm(dto.Id, dto.AccessToken, dto.BeardLength, dto.GearInches);
             await _repository.Add(censusForm);
 
-            await _mediator.Publish(new CensusSubmittedEvent(dto));
+            await _mediator.Publish(new CensusSubmittedEvent(dto), cancellationToken);
         }
     }
 }

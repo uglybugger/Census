@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shouldly;
 using Xunit;
 
-namespace Census.Tests.Unit.Conventions
+namespace Census.Tests.Conventions
 {
     public class AllControllerClasses
     {

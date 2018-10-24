@@ -2,7 +2,7 @@ using Census.Contracts.Validation.Attributes;
 using Shouldly;
 using Xunit;
 
-namespace Census.Tests.Unit
+namespace Census.Tests
 {
     public class AccessCodeTests
     {
