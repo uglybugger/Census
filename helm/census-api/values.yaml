@@ -13,9 +13,17 @@ service:
   port: 80
 
 seq:
-  endpoint: "http://seq.census.example.com"
+  endpoint: "https://seq.census.example.com"
   apiKey: "SOME_KEY"
-  environment: "Development"
+
+cosmosdb:
+  endpoint: "https://cosmosdb.example.com/"
+  key: "SOME_KEY"
+  databaseName: "hipster-census"
+
+hosting:
+  cors:
+    allowedOrigins[0]: "https://census.example.com/"
 
 ingress:
   enabled: false

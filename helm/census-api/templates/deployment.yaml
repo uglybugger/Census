@@ -24,12 +24,18 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Chart.Version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: "CENSUS_SEQ_ENVIRONMENT"
-            value: "{{ .Values.seq.environment }}"
-          - name: "CENSUS_SEQ_ENDPOINT"
+          - name: "Logging:Seq:Uri"
             value: "{{ .Values.seq.endpoint }}"
-          - name: "CENSUS_SEQ_APIKEY"
+          - name: "Logging:Seq:ApiKey"
             value: "{{ .Values.seq.apiKey }}"
+          - name: "Persistence:CosmosDb:Endpoint"
+            value: "{{ .Values.cosmosdb.endpoint }}"
+          - name: "Persistence:CosmosDb:Key"
+            value: "{{ .Values.cosmosdb.key }}"
+          - name: "Persistence:CosmosDb:DatabaseName"
+            value: "{{ .Values.cosmosdb.databaseName }}"
+          - name: "Hosting:Cors:AllowedOrigins"
+            value: "{{ .Values.hosting.cors.allowedOrigins }}"
           ports:
             - name: http
               containerPort: 80
