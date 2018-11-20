@@ -5,12 +5,11 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  tag: stable
+  repository: uglybugger/census-api
   pullPolicy: IfNotPresent
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
 
 ingress:
