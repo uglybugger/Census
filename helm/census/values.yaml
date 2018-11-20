@@ -17,7 +17,6 @@ api:
 seq:
   endpoint: "http://seq.census.example.com"
   apiKey: "SOME_KEY"
-  environment: "Development"
 
 ingress:
   enabled: false
