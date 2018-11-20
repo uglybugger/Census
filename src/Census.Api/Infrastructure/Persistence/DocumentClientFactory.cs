@@ -29,7 +29,7 @@ namespace Census.Api.Infrastructure.Persistence
 
         private async Task ConfigureDocumentClient(DocumentClient client)
         {
-            await client.CreateDatabaseIfNotExistsAsync(new Database {Id = "hipster-census"});
+            await client.CreateDatabaseIfNotExistsAsync(new Database {Id = _cosmosDbSettings.DatabaseName});
 
             var aggregateRootTypes = GetType()
                                      .Assembly.DefinedTypes
