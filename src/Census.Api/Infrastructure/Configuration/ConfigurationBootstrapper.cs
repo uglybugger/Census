@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Census.Api.AppSettings;
 using Microsoft.Extensions.Configuration;
 
@@ -11,10 +12,12 @@ namespace Census.Api.Infrastructure.Configuration
             configuration = new ConfigurationBuilder()
                             .SetBasePath(Directory.GetCurrentDirectory())
                             .AddJsonFile("appsettings.json")
+                            .AddEnvironmentVariables()
                             .AddCommandLine(args)
                             .Build();
 
             appSettingsRoot = configuration.Get<AppSettingsRoot>();
+            Console.WriteLine(appSettingsRoot.Logging.Environment);
         }
     }
 }
