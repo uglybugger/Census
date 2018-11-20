@@ -26,13 +26,13 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Chart.Version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: "REACT_APP_API_ENDPOINT"
+          - name: "CENSUS_API_ENDPOINT"
             value: "{{ .Values.api.endpoint }}"
-          - name: "REACT_APP_LOGGING_ENVIRONMENT"
+          - name: "CENSUS_SEQ_ENVIRONMENT"
             value: "{{ .Values.seq.environment }}"
-          - name: "REACT_APP_SEQ_ENDPOINT"
+          - name: "CENSUS_SEQ_ENDPOINT"
             value: "{{ .Values.seq.endpoint }}"
-          - name: "REACT_APP_SEQ_APIKEY"
+          - name: "CENSUS_SEQ_APIKEY"
             value: "{{ .Values.seq.apiKey }}"
           ports:
             - name: http
