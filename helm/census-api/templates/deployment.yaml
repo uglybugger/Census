@@ -24,7 +24,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Chart.Version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: "Logging:Seq:Uri"
+          - name: "Logging__Seq__Uri"
             value: "{{ .Values.seq.endpoint }}"
           - name: "Logging__Seq__ApiKey"
             value: "{{ .Values.seq.apiKey }}"
