@@ -5,6 +5,7 @@ import uuid from 'uuid';
 import AccessTokenQuestion from '../molecules/AccessTokenQuestion';
 import GearInchesQuestion from '../molecules/GearInchesQuestion';
 import BeardLengthQuestion from '../molecules/BeardLengthQuestion';
+import BeerBitternessQuestion from '../molecules/BeerBitternessQuestion';
 
 class CensusForm extends Component {
 
@@ -17,7 +18,8 @@ class CensusForm extends Component {
                 id: uuid(),
                 accessToken: '13a7-7f24-0000-0009',
                 beardLength: 0,
-                gearInches: 120
+                gearInches: 120,
+                beerBitterness: 5
             }
         };
 
@@ -63,6 +65,11 @@ class CensusForm extends Component {
 
                     <GearInchesQuestion
                         answer={this.state.submission.gearInches}
+                        onAnswerChanged={this.handleAnswerChanged}
+                    />
+
+                    <BeerBitternessQuestion
+                        answer={this.state.submission.beerBitterness}
                         onAnswerChanged={this.handleAnswerChanged}
                     />
 
