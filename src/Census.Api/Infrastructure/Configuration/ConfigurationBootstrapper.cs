@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Census.Api.AppSettings;
 using Microsoft.Extensions.Configuration;
 
@@ -17,7 +16,6 @@ namespace Census.Api.Infrastructure.Configuration
                             .Build();
 
             appSettingsRoot = configuration.Get<AppSettingsRoot>();
-            Console.WriteLine(appSettingsRoot.Logging.Environment);
         }
     }
 }

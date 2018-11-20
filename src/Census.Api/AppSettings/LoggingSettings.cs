@@ -6,9 +6,6 @@ namespace Census.Api.AppSettings
     public class LoggingSettings : IConfigurationSetting
     {
         [Required]
-        public string Environment { get; set; }
-
-        [Required]
         public LogEventLevel LogEventLevel { get; set; }
 
         [Required]
