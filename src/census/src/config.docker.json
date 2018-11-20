@@ -1,10 +1,10 @@
 {
     "Application": {
         "Name": "Hipster Census React",
-        "Version": "${REACT_APP_APPLICATION_VERSION}"
+        "Version": "${CENSUS_APPLICATION_VERSION}"
     },
     "Api": {
-        "Endpoint": "${REACT_APP_API_ENDPOINT}"
+        "Endpoint": "${CENSUS_API_ENDPOINT}"
     },
     "Logging": {
         "LogEventLevel": "Verbose",

@@ -26,6 +26,8 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Chart.Version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+          - name: "CENSUS_APPLICATION_VERSION"
+            value: "{{ .Values.census.applicationVersion }}"
           - name: "CENSUS_API_ENDPOINT"
             value: "{{ .Values.api.endpoint }}"
           - name: "CENSUS_SEQ_ENVIRONMENT"

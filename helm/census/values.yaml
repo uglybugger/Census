@@ -8,6 +8,9 @@ service:
   type: LoadBalancer
   port: 80
 
+census:
+  applicationVersion: "0.0.0"
+
 api:
   endpoint: "http://api.census.example.com/"
 
