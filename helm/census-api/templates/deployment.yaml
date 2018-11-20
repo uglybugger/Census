@@ -26,16 +26,14 @@ spec:
           env:
           - name: "Logging:Seq:Uri"
             value: "{{ .Values.seq.endpoint }}"
-          - name: "Logging:Seq:ApiKey"
+          - name: "Logging__Seq__ApiKey"
             value: "{{ .Values.seq.apiKey }}"
-          - name: "Persistence:CosmosDb:Endpoint"
+          - name: "Persistence__CosmosDb__Endpoint"
             value: "{{ .Values.cosmosdb.endpoint }}"
-          - name: "Persistence:CosmosDb:Key"
+          - name: "Persistence__CosmosDb__Key"
             value: "{{ .Values.cosmosdb.key }}"
-          - name: "Persistence:CosmosDb:DatabaseName"
+          - name: "Persistence__CosmosDb__DatabaseName"
             value: "{{ .Values.cosmosdb.databaseName }}"
-          - name: "Hosting:Cors:AllowedOrigins"
-            value: "{{ .Values.hosting.cors.allowedOrigins }}"
           ports:
             - name: http
               containerPort: 80

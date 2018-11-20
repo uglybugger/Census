@@ -21,10 +21,6 @@ cosmosdb:
   key: "SOME_KEY"
   databaseName: "hipster-census"
 
-hosting:
-  cors:
-    allowedOrigins[0]: "https://census.example.com/"
-
 ingress:
   enabled: false
   annotations: {}
