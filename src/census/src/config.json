@@ -10,8 +10,7 @@
         "LogEventLevel": "Verbose",
         "Seq": {
             "Uri": "http://localhost:5341",
-            "ApiKey": "PdmVM9wfHbatOYEMbXEK",
-            "Environment": "Development"
+            "ApiKey": "PdmVM9wfHbatOYEMbXEK"
         }
     }
 }

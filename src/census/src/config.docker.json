@@ -10,8 +10,7 @@
         "LogEventLevel": "Verbose",
         "Seq": {
             "Uri": "https://seq.hipstercensus.com/",
-            "ApiKey": "PdmVM9wfHbatOYEMbXEK",
-            "Environment": "Production"
+            "ApiKey": "MVNN11dcnX50vmkLrqnr"
         }
     }
 }
