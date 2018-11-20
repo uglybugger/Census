@@ -1,17 +1,17 @@
 {
     "Application": {
         "Name": "Hipster Census React",
-        "Version": "${CENSUS_APPLICATION_VERSION}"
+        "Version": "1.0.0"
     },
     "Api": {
-        "Endpoint": "${CENSUS_API_ENDPOINT}"
+        "Endpoint": "https://api.hipstercensus.com/"
     },
     "Logging": {
         "LogEventLevel": "Verbose",
         "Seq": {
-            "Uri": "${CENSUS_SEQ_ENDPOINT}",
-            "ApiKey": "${CENSUS_SEQ_APIKEY}",
-            "Environment": "${CENSUS_SEQ_ENVIRONMENT}"
+            "Uri": "https://seq.hipstercensus.com/",
+            "ApiKey": "PdmVM9wfHbatOYEMbXEK",
+            "Environment": "Production"
         }
     }
 }
