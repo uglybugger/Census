@@ -1,0 +1,7 @@
+#!/bin/sh
+
+SOURCE_FILE=$1
+TEMP_FILE=$SOURCE_FILE.temp
+
+cat $SOURCE_FILE | envsubst > $TEMP_FILE
+mv -f $TEMP_FILE $SOURCE_FILE
