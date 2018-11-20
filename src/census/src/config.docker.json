@@ -7,11 +7,11 @@
         "Endpoint": "${REACT_APP_API_ENDPOINT}"
     },
     "Logging": {
-        "Environment": "${REACT_APP_LOGGING_ENVIRONMENT}",
+        "Environment": "${REACT_APP_SEQ_ENVIRONMENT}",
         "LogEventLevel": "Verbose",
         "Seq": {
-            "Uri": "http://localhost:5341",
-            "ApiKey": "PdmVM9wfHbatOYEMbXEK"
+            "Uri": "#${REACT_APP_SEQ_ENDPOINT}",
+            "ApiKey": "${REACT_APP_SEQ_APIKEY}"
         }
     }
 }

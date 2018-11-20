@@ -8,6 +8,14 @@ service:
   type: LoadBalancer
   port: 80
 
+api:
+  endpoint: "http://api.census.example.com/"
+
+seq:
+  endpoint: "http://seq.census.example.com"
+  apiKey: "SOME_KEY"
+  environment: "Development"
+
 ingress:
   enabled: false
   annotations: {}

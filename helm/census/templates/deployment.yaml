@@ -25,6 +25,15 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Chart.Version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          - name: "REACT_APP_API_ENDPOINT"
+            value: "{{ .Values.api.endpoint }}"
+          - name: "REACT_APP_LOGGING_ENVIRONMENT"
+            value: "{{ .Values.seq.environment }}"
+          - name: "REACT_APP_SEQ_ENDPOINT"
+            value: "{{ .Values.seq.endpoint }}"
+          - name: "REACT_APP_SEQ_APIKEY"
+            value: "{{ .Values.seq.apiKey }}"
           ports:
             - name: http
               containerPort: 80
