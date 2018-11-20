@@ -7,11 +7,11 @@
         "Endpoint": "http://localhost:61155/"
     },
     "Logging": {
-        "Environment": "Development",
         "LogEventLevel": "Verbose",
         "Seq": {
             "Uri": "http://localhost:5341",
-            "ApiKey": "PdmVM9wfHbatOYEMbXEK"
+            "ApiKey": "PdmVM9wfHbatOYEMbXEK",
+            "Environment": "Development"
         }
     }
 }
