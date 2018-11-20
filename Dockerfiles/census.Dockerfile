@@ -1,9 +1,9 @@
 FROM node:9.6.1 as build
 WORKDIR /src
 COPY src/census/ ./
-COPY src/census/src/config.docker.json ./src/config.json
-RUN npm install
 
+RUN mv -f ./src/config.docker.json ./src/config.json
+RUN npm install
 RUN npm run build
 
 FROM nginx:1.13.9-alpine AS base
