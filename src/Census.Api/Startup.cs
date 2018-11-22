@@ -35,7 +35,7 @@ namespace Census.Api
             services.Configure<ApiBehaviorOptions>(options =>
                                                    {
                                                        options.SuppressConsumesConstraintForFormFileParameters = true;
-                                                       options.SuppressInferBindingSourcesForParameters = false;
+                                                       options.SuppressInferBindingSourcesForParameters = true;
                                                        options.SuppressModelStateInvalidFilter = false;
                                                        options.InvalidModelStateResponseFactory = InvalidModelStateResponseFactory.CreateResponse;
                                                    });
