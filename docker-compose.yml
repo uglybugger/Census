@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfiles/census.Dockerfile
+      args:
+        - BUILD_NUMBER
     image: census:latest
     expose:
       - 80

@@ -3,8 +3,9 @@ const StructuredLog = require('structured-log');
 const SeqSink = require('structured-log-seq-sink')
 
 class LogBootstrapper {
-    constructor(configuration) {
+    constructor(configuration, version) {
         this.configuration = configuration;
+        this.version = version;
 
         this.bootstrap = this.bootstrap.bind(this);
     }
@@ -34,9 +35,9 @@ class LogBootstrapper {
 
         var logger = StructuredLog.configure()
             .enrich({
-                "ApplicationName": this.configuration.Application.Name,
-                "ApplicationVersion": this.configuration.Application.Version,
-                "ProcessName": "react"
+                "ApplicationName": "Hipster Census",
+                "ApplicationVersion": this.version.Version,
+                "ProcessName": "browser"
             })
             .enrich(new BrowserIdEnricher().enrich)
             .writeTo(consoleSink)

@@ -1,8 +1,10 @@
 FROM node:9.6.1 as build
+ARG BUILD_NUMBER=0.0.0
 WORKDIR /src
 COPY src/census/ ./
 
 RUN mv -f ./src/config.docker.json ./src/config.json
+RUN echo '{"Version":"${BUILD_NUMBER}"}' > ./src/version.json
 RUN npm install
 RUN npm run build
 

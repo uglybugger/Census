@@ -1,8 +1,4 @@
 {
-    "Application": {
-        "Name": "Hipster Census React",
-        "Version": "1.0.0.0"
-    },
     "Api": {
         "Endpoint": "http://localhost:61155/"
     },

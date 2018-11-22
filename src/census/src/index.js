@@ -8,13 +8,16 @@ import App from './App';
 import './index.css';
 
 import configuration from './config.json';
+import version from './version.json';
 
-var logBootstrapper = new LogBootstrapper(configuration);
+var logBootstrapper = new LogBootstrapper(configuration, version);
 logBootstrapper.bootstrap();
 var apiClient = new ApiClient(configuration);
 
 var stores = {
     apiClient: apiClient,
+    configuration: configuration,
+    version: version
 };
 
 spy((event) => {

@@ -13,10 +13,12 @@ namespace Census.Api
         {
             try
             {
+                Console.WriteLine("Bootstrapping...");
                 ConfigurationBootstrapper.Bootstrap(args, out var configuration, out var appSettingsRoot);
                 LogBootstrapper.Bootstrap(appSettingsRoot.Application, appSettingsRoot.Logging);
                 WebHostBootstrapper.Bootstrap<Startup>(configuration, out var webHost);
 
+                Log.Debug("Starting web host");
                 webHost.Run();
             }
             catch (Exception ex)

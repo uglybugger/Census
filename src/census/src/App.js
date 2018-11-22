@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './App.css';
 
-import configuration from './config.json';
+import version from './version.json';
 
 import logo from './logo.png';
-import { Grid, Row, Col, Image, Jumbotron, Footer } from 'react-bootstrap';
+import { Grid, Row, Col, Image, Jumbotron } from 'react-bootstrap';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import CensusDataEntryPage from './components/pages/CensusDataEntryPage';
 import SubmittedPage from './components/pages/SubmittedPage';
@@ -55,7 +54,7 @@ class App extends Component {
 
                 <Row>
                     <Col></Col>
-                    <Col>{configuration.Application.Version}</Col>
+                    <Col>{version.Version}</Col>
                     <Col></Col>
                 </Row>
 
@@ -65,7 +64,6 @@ class App extends Component {
 }
 
 App.propTypes = {
-    configuraton: PropTypes.object.iRequired
 };
 
 export default App;

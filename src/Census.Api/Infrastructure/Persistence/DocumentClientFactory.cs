@@ -4,16 +4,19 @@ using Census.Api.AppSettings;
 using Census.Api.Domain;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
+using Serilog;
 
 namespace Census.Api.Infrastructure.Persistence
 {
     public class DocumentClientFactory
     {
         private readonly CosmosDbSettings _cosmosDbSettings;
+        private readonly ILogger _logger;
 
-        public DocumentClientFactory(CosmosDbSettings cosmosDbSettings)
+        public DocumentClientFactory(CosmosDbSettings cosmosDbSettings, ILogger logger)
         {
             _cosmosDbSettings = cosmosDbSettings;
+            _logger = logger;
         }
 
         public DocumentClient Create()
@@ -29,6 +32,7 @@ namespace Census.Api.Infrastructure.Persistence
 
         private async Task ConfigureDocumentClient(DocumentClient client)
         {
+            _logger.Debug("Creating database {DatabaseName} if it doesn't already exist...", _cosmosDbSettings.DatabaseName);
             await client.CreateDatabaseIfNotExistsAsync(new Database {Id = _cosmosDbSettings.DatabaseName});
 
             var aggregateRootTypes = GetType()
@@ -38,12 +42,15 @@ namespace Census.Api.Infrastructure.Persistence
                                      .Where(t => !t.IsAbstract)
                                      .ToArray();
 
+            var databaseUri = UriFactory.CreateDatabaseUri(_cosmosDbSettings.DatabaseName);
             foreach (var aggregateRootType in aggregateRootTypes)
             {
-                var databaseUri = UriFactory.CreateDatabaseUri(_cosmosDbSettings.DatabaseName);
                 var documentCollection = new DocumentCollection {Id = aggregateRootType.Name};
+                _logger.Debug("Creating document collection {DocumentCollectionId} if it doesn't already exist.", documentCollection.Id);
                 await client.CreateDocumentCollectionIfNotExistsAsync(databaseUri, documentCollection);
             }
+
+            _logger.Debug("Configured document client.");
         }
     }
 }
