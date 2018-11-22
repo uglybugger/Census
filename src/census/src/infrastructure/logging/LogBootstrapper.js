@@ -30,7 +30,8 @@ class LogBootstrapper {
         var seqSink = new SeqSink({
             url: this.configuration.Logging.Seq.Uri,
             apiKey: this.configuration.Logging.Seq.ApiKey,
-            levelSwitch: levelSwitch
+            levelSwitch: levelSwitch,
+            suppressErrors: false
         });
 
         var logger = StructuredLog.configure()
