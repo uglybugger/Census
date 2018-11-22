@@ -4,7 +4,7 @@ WORKDIR /src
 COPY src/census/ ./
 
 RUN mv -f ./src/config.docker.json ./src/config.json
-RUN echo '{"Version":"${BUILD_NUMBER}"}' > ./src/version.json
+RUN echo {\"Version\":\"${BUILD_NUMBER}\"} > ./src/version.json
 RUN npm install
 RUN npm run build
 
