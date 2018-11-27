@@ -10,5 +10,14 @@ namespace Census.Contracts.Contracts
 
         [Required]
         public CompletedCensusDto CompletedCensus { get; set; }
+
+        public SubmitCensusCommand()
+        {
+        }
+
+        public SubmitCensusCommand(CompletedCensusDto completedCensus)
+        {
+            CompletedCensus = completedCensus;
+        }
     }
 }

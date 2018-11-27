@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import version from './version.json';
-import { Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import WelcomePage from './components/pages/WelcomePage';

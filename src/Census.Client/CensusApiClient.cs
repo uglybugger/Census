@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Census.Contracts;
 using Census.Contracts.HttpRequestRouting.Attributes;
+using Census.Contracts.Validation;
 using Newtonsoft.Json;
 
 namespace Census.Client
@@ -14,18 +17,19 @@ namespace Census.Client
     {
         private readonly Uri _apiEndpoint;
 
-        private static readonly RateLimiter _rateLimiter = new RateLimiter();
+        private static readonly RateLimiter _rateLimiter = new RateLimiter(100, TimeSpan.FromSeconds(1));
         private static readonly HttpClient _httpClient = new HttpClient();
 
         public CensusApiClient(Uri apiEndpoint)
         {
             _apiEndpoint = apiEndpoint;
+
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public async Task Send<TCommand>(TCommand command, CancellationToken cancellationToken)
         {
-            await _rateLimiter.Wait();
-
             await MakeHttpRequest(command, cancellationToken);
         }
 
@@ -43,16 +47,27 @@ namespace Census.Client
         {
             await _rateLimiter.Wait();
 
+            AssertValidPayload(dto);
+
             var requestRoute = RequestRouteFor(dto);
             var requestUri = new Uri(_apiEndpoint, requestRoute.RelativePath);
             var request = new HttpRequestMessage(requestRoute.Method, requestUri);
             var json = JsonConvert.SerializeObject(dto);
-            request.Content = new StringContent(json);
+            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var httpResponse = await _httpClient.SendAsync(request, cancellationToken);
             httpResponse.EnsureSuccessStatusCode();
 
             return httpResponse;
+        }
+
+        private static void AssertValidPayload(object dto)
+        {
+            var validationFailures = RecursiveValidator.ValidateObject(dto).ToArray();
+            if (validationFailures.Any())
+            {
+                throw new HttpRequestException("Response status code does not indicate success: 400 (Bad Request).");
+            }
         }
 
         private static RequestRoute RequestRouteFor(object dto)
@@ -63,6 +78,7 @@ namespace Census.Client
 
         public void Dispose()
         {
+            _rateLimiter?.Dispose();
         }
     }
 }

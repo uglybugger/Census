@@ -45,7 +45,10 @@ namespace Census.Api.Infrastructure.Persistence
             var databaseUri = UriFactory.CreateDatabaseUri(_cosmosDbSettings.DatabaseName);
             foreach (var aggregateRootType in aggregateRootTypes)
             {
-                var documentCollection = new DocumentCollection {Id = aggregateRootType.Name};
+                var partitionKey = new PartitionKeyDefinition();
+                partitionKey.Paths.Add($"/{nameof(AggregateRoot.PartitionKey)}");
+
+                var documentCollection = new DocumentCollection {Id = aggregateRootType.Name, PartitionKey = partitionKey};
                 _logger.Debug("Creating document collection {DocumentCollectionId} if it doesn't already exist.", documentCollection.Id);
                 await client.CreateDocumentCollectionIfNotExistsAsync(databaseUri, documentCollection);
             }

@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Census.Contracts", "Census.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Census.Tests", "Census.Tests\Census.Tests.csproj", "{4FFCA059-FF6F-41FE-AB3C-EED272030DCA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Census.AccessTokenGenerator", "Census.AccessTokenGenerator\Census.AccessTokenGenerator.csproj", "{EB3AADAB-ADBD-461E-B237-23E3CB6A60A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Census.TestHarness", "Census.TestHarness\Census.TestHarness.csproj", "{AF5BDF1C-1511-4D5D-BCDF-0E2C1FB0A4F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{4FFCA059-FF6F-41FE-AB3C-EED272030DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FFCA059-FF6F-41FE-AB3C-EED272030DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FFCA059-FF6F-41FE-AB3C-EED272030DCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB3AADAB-ADBD-461E-B237-23E3CB6A60A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB3AADAB-ADBD-461E-B237-23E3CB6A60A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB3AADAB-ADBD-461E-B237-23E3CB6A60A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB3AADAB-ADBD-461E-B237-23E3CB6A60A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF5BDF1C-1511-4D5D-BCDF-0E2C1FB0A4F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF5BDF1C-1511-4D5D-BCDF-0E2C1FB0A4F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF5BDF1C-1511-4D5D-BCDF-0E2C1FB0A4F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF5BDF1C-1511-4D5D-BCDF-0E2C1FB0A4F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

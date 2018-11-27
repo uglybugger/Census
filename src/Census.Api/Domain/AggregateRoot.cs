@@ -4,6 +4,8 @@ namespace Census.Api.Domain
 {
     public abstract class AggregateRoot : IAggregateRoot
     {
+        private Guid _id;
+
         protected AggregateRoot()
         {
         }
@@ -13,6 +15,16 @@ namespace Census.Api.Domain
             this.id = id;
         }
 
-        public Guid id { get; protected set; }
+        public Guid id
+        {
+            get => _id;
+            protected set
+            {
+                _id = value;
+                PartitionKey = value.GetHashCode() % 10;
+            }
+        }
+
+        public int PartitionKey { get; protected set; }
     }
 }

@@ -9,16 +9,16 @@ namespace Census.Tests
         [Fact]
         public void WhenGeneratingANumericAccessCode_ThatCodeShouldVerifySuccessfully()
         {
-            var calculator = new AccessCodeCalculator();
-            var code = calculator.GenerateULongAccessCode();
+            var calculator = new AccessTokenCalculator();
+            var code = calculator.GenerateULongAccessToken();
             calculator.IsValid(code).ShouldBeTrue();
         }
 
         [Fact]
         public void WhenGeneratingANumericAccessCode_AndMessingWithTheChecksum_ThatCodeShouldNotVerifySuccessfully()
         {
-            var calculator = new AccessCodeCalculator();
-            var code = calculator.GenerateULongAccessCode();
+            var calculator = new AccessTokenCalculator();
+            var code = calculator.GenerateULongAccessToken();
             code++;
             calculator.IsValid(code).ShouldBeFalse();
         }
@@ -26,8 +26,8 @@ namespace Census.Tests
         [Fact]
         public void WhenGeneratingAnAccessCode_ThatCodeShouldVerifySuccessfully()
         {
-            var calculator = new AccessCodeCalculator();
-            var code = calculator.GenerateAccessCode();
+            var calculator = new AccessTokenCalculator();
+            var code = calculator.GenerateAccessToken();
             calculator.IsValid(code).ShouldBeTrue();
         }
     }
