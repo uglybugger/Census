@@ -6,6 +6,7 @@ COPY src .
 
 # Build and pack the packages separately. `nuget pack` is finnicky.
 RUN dotnet build -p:Version=${BUILD_NUMBER} -c Release
+RUN dotnet pack Census.Contracts -c Release -o out --include-symbols --no-build -p:Version=${BUILD_NUMBER} -p:PackageVersion=${BUILD_NUMBER}
 RUN dotnet pack Census.Client -c Release -o out --include-symbols --no-build -p:Version=${BUILD_NUMBER} -p:PackageVersion=${BUILD_NUMBER}
 
 # Publish the Web API app separately. Thanks, NuGet.
