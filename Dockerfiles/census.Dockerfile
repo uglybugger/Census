@@ -1,5 +1,8 @@
 FROM node:9.6.1 as build
 ARG BUILD_NUMBER=0.0.0
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
 WORKDIR /src
 COPY src/census/ ./
 
