@@ -7,8 +7,9 @@ import { compose } from 'recompose';
 import Page from './Page';
 import CensusForm from '../organisms/CensusForm';
 import ApiClient from '../../infrastructure/api/ApiClient';
-import SubmitCensusCommand from '../../services/SubmitCensusCommand';
+import SubmitCensusCommand from '../../infrastructure/api/SubmitCensusCommand';
 import { Logger } from 'structured-log';
+import CompletedCensusDto from '../../infrastructure/api/CompletedCensusDto';
 
 class CensusDataEntryPage extends Page {
 
@@ -19,7 +20,8 @@ class CensusDataEntryPage extends Page {
     }
 
     async submit(census) {
-        var command = new SubmitCensusCommand(census);
+        var completedCensusDto = new CompletedCensusDto(census.id, census.accessToken, census.legalName, census.baristaName, census.beardLength, census.gearInches, census.beerBitterness, census.favouriteBand);
+        var command = new SubmitCensusCommand(completedCensusDto);
         await this.props.apiClient.send(command);
         setTimeout(() => this.props.history.push("/submitted"), 0);
     }

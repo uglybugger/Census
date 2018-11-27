@@ -103,7 +103,7 @@ class CensusForm extends Component {
                     <Button bsStyle="primary" onClick={this.canSubmit() ? this.handleSubmit : null} disabled={!this.canSubmit()}>Submit my census</Button>
                 </form>
                 <div>
-                    {JSON.stringify(this.state)}
+                    {/* {JSON.stringify(this.state)} */}
                 </div>
             </div>
         );

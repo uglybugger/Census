@@ -12,18 +12,17 @@ class Question extends Component {
         this.state = {
             answer: props.answer,
             validation: {
-                state: "success",
+                validationState: null,
                 message: null
             }
         }
 
         this.handleChange = this.handleChange.bind(this);
-        this.getValidationState = this.getValidationState.bind(this);
     }
 
     handleChange(e) {
         var answer = e.target.value;
-        var validation = this.getValidationState(answer);
+        var validation = this.props.validate(answer);
 
         this.setState({
             answer: answer,
@@ -33,18 +32,13 @@ class Question extends Component {
         this.props.onAnswerChanged(this.props.fieldName, answer);
     }
 
-    getValidationState(answer) {
-        var validationState = this.props.validate(answer);
-        return validationState;
-    }
-
     render() {
         return (
             <div className="row">
                 <div className="col-sm-12">
                     <FormGroup
                         controlId={this.props.fieldName}
-                        validationState={this.state.validation.state}
+                        validationState={this.state.validation.validationState}
                     >
                         <ControlLabel>{this.props.question}</ControlLabel>
                         <FormControl type={this.props.inputType} value={this.props.answer} placeholder={this.props.placeholder} readOnly={this.props.isReadOnly} onChange={this.handleChange} />
@@ -52,6 +46,7 @@ class Question extends Component {
                         <HelpBlock>{this.state.validation.message}</HelpBlock>
                     </FormGroup>
                 </div>
+                {/* {JSON.stringify(this.state)} */}
             </div>
         );
     }

@@ -54,7 +54,10 @@ class App extends Component {
 
                 <Row>
                     <Col></Col>
-                    <Col>{version.Version}</Col>
+                    <Col style={{
+                        "text-align": "center",
+                        "font-size": "small"
+                    }}>{version.Version}</Col>
                     <Col></Col>
                 </Row>
 
