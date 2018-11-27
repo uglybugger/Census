@@ -2,23 +2,27 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Census.Client;
-using Census.Contracts.Contracts;
 using Census.Contracts.Contracts.Submission;
 
 namespace Census.TestHarness
 {
-    class Program
+    public static class Program
     {
-        private static void Main(string[] args)
+        private static CancellationTokenSource _cancellationTokenSource;
+
+        private static void Main()
         {
-            MainAsync().Wait();
+            _cancellationTokenSource = new CancellationTokenSource();
+            Console.CancelKeyPress += (sender, args) => _cancellationTokenSource.Cancel(false);
+
+            Task.Run(() => MainAsync()).Wait();
         }
 
         public static async Task MainAsync()
         {
             var apiClient = new CensusApiClient(new Uri("https://api.hipstercensus.com/"));
 
-            for (var i = 0; i < 1000; i++)
+            for (var i = 0; i < 100; i++)
             {
                 try
                 {
@@ -34,7 +38,7 @@ namespace Census.TestHarness
                                               FavouriteBand = "You've never heard of them"
                                           };
                     var command = new SubmitCensusCommand(completedCensus);
-                    await apiClient.Send(command, CancellationToken.None);
+                    await apiClient.Send(command, _cancellationTokenSource.Token);
                     Console.WriteLine($"Request completed at {DateTime.Now}");
                 }
                 catch (Exception ex)

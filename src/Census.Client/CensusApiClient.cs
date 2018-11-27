@@ -56,7 +56,16 @@ namespace Census.Client
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var httpResponse = await _httpClient.SendAsync(request, cancellationToken);
-            httpResponse.EnsureSuccessStatusCode();
+            try
+            {
+                httpResponse.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException ex)
+            {
+                var content = await httpResponse.Content.ReadAsStringAsync();
+                ex.Data["Content"] = content;
+                throw;
+            }
 
             return httpResponse;
         }
@@ -66,7 +75,10 @@ namespace Census.Client
             var validationFailures = RecursiveValidator.ValidateObject(dto).ToArray();
             if (validationFailures.Any())
             {
-                throw new HttpRequestException("Response status code does not indicate success: 400 (Bad Request).");
+                // make it look just like the request actually went over the wire, even though we failed it locally.
+                var ex = new HttpRequestException("Response status code does not indicate success: 400 (Bad Request).");
+                ex.Data["Content"] = JsonConvert.SerializeObject(validationFailures);
+                throw ex;
             }
         }
 
