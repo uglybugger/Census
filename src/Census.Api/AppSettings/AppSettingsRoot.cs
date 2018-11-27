@@ -11,9 +11,6 @@ namespace Census.Api.AppSettings
         public LoggingSettings Logging { get; set; }
 
         [Required]
-        public HostingSettings Hosting { get; set; }
-
-        [Required]
         public PersistenceSettings Persistence { get; set; }
     }
 }

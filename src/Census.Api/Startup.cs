@@ -51,8 +51,6 @@ namespace Census.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            var corsSettings = _configuration.Get<AppSettingsRoot>().Hosting.Cors;
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -61,7 +59,7 @@ namespace Census.Api
             app.UseCors(builder =>
                         {
                             builder
-                                .WithOrigins(corsSettings.AllowedOrigins)
+                                .WithOrigins("*")
                                 .AllowAnyHeader()
                                 .AllowAnyMethod()
                                 .SetPreflightMaxAge(TimeSpan.FromMinutes(1));
