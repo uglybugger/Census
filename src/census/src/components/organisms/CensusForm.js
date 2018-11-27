@@ -49,7 +49,7 @@ class CensusForm extends Component {
 
     async handleSubmit(e) {
         if (!this.canSubmit()) return;
-        
+
         try {
             this.setState({ isLoading: true });
             await this.props.submit(this.state.submission);
@@ -100,7 +100,9 @@ class CensusForm extends Component {
                         onAnswerChanged={this.handleAnswerChanged}
                     />
 
-                    <Button bsStyle="primary" onClick={this.canSubmit() ? this.handleSubmit : null} disabled={!this.canSubmit()}>Submit my census</Button>
+                    <div className="action-buttons">
+                        <Button bsStyle="primary" onClick={this.canSubmit() ? this.handleSubmit : null} disabled={!this.canSubmit()}>Submit my census.</Button>
+                    </div>
                 </form>
                 <div>
                     {/* {JSON.stringify(this.state)} */}

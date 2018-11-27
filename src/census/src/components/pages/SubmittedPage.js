@@ -5,7 +5,11 @@ class SubmittedPage extends Page {
 
     render() {
         return (
-            <p>Submitted!</p>
+            <div>
+                <h1>Thank you.</h1>
+                <p>Your census has been lodged.</p>
+                <p>Why not celebrate with a nice, cold home-brew?</p>
+            </div>
         );
     }
 }

@@ -1,1 +1,14 @@
-﻿
+﻿div.page-component {
+    padding-left: 16%;
+    padding-right: 16%;
+}
+
+div.action-buttons {
+    text-align: center;
+}
+
+div.footer {
+    margin-top: 1em;
+    text-align: center;
+    font-size: x-small;
+}

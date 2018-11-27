@@ -1,67 +1,48 @@
 import React, { Component } from 'react';
 import './App.css';
-
 import version from './version.json';
+import { Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-import logo from './logo.png';
-import { Grid, Row, Col, Image, Jumbotron } from 'react-bootstrap';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import WelcomePage from './components/pages/WelcomePage';
 import CensusDataEntryPage from './components/pages/CensusDataEntryPage';
 import SubmittedPage from './components/pages/SubmittedPage';
-import WelcomePage from './components/pages/WelcomePage';
+import AboutPage from './components/pages/AboutPage';
 
 class App extends Component {
 
     render() {
         return (
-            <Grid>
-                <Row>
-                    <Col>
-                    </Col>
-                    <Col>
-                        <Jumbotron>
-                            <Grid>
-                                <Row>
-                                    <Col sm={8}>
-                                        <h1>The Great Hipster Census of 2018</h1>
-                                        <p>Of course you knew about it <em>before</em> it was cool.</p>
-                                    </Col>
-                                    <Col sm={4}>
-                                        <Image src={logo} responsive />
-                                    </Col>
-                                </Row>
-                            </Grid>
-                        </Jumbotron>
-                    </Col>
-                    <Col>
-                    </Col>
-                </Row>
+            <Router>
+                <div>
+                    <Navbar inverse collapseOnSelect>
+                        <Navbar.Header>
+                            <Navbar.Brand>
+                                <Link to="/">Hipster Census</Link>
+                            </Navbar.Brand>
+                            <Navbar.Toggle />
+                        </Navbar.Header>
+                        <Navbar.Collapse>
+                            <Nav>
+                                <NavItem eventKey={1}>
+                                    <Link to="/about">About</Link>
+                                </NavItem>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Navbar>
+                    <div className="page-component">
+                        <Route exact path="/" component={WelcomePage} />
+                        <Route exact path="/data-entry" component={CensusDataEntryPage} />
+                        <Route exact path="/submitted" component={SubmittedPage} />
+                        <Route exact path="/about" component={AboutPage} />
+                    </div>
 
-                <Row>
-                    <Col>
-                    </Col>
-                    <Col>
-                        <Router>
-                            <div>
-                                <Route exact path="/" component={WelcomePage} />
-                                <Route exact path="/data-entry" component={CensusDataEntryPage} />
-                                <Route exact path="/submitted" component={SubmittedPage} />
-                            </div>
-                        </Router>
-
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col></Col>
-                    <Col style={{
-                        "text-align": "center",
-                        "font-size": "small"
-                    }}>{version.Version}</Col>
-                    <Col></Col>
-                </Row>
-
-            </Grid>
+                    <div className="footer">
+                        <hr style={{ "width": "50%" }} />
+                        {version.Version}
+                    </div>
+                </div>
+            </Router>
         );
     }
 }
