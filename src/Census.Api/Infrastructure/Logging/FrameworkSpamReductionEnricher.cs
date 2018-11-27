@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Formatters.Json.Internal;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Internal;
 using Serilog.Core;
@@ -23,6 +24,12 @@ namespace Census.Api.Infrastructure.Logging
             }
 
             if (IsFrom<ContentResultExecutor>(logEvent))
+            {
+                _logLevelBackingField.SetValue(logEvent, LogEventLevel.Verbose);
+                return;
+            }
+
+            if (IsFrom<JsonResultExecutor>(logEvent))
             {
                 _logLevelBackingField.SetValue(logEvent, LogEventLevel.Verbose);
                 return;
