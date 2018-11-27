@@ -39,9 +39,21 @@ namespace Census.Api.Infrastructure.Logging
             {
                 _logLevelBackingField.SetValue(logEvent, LogEventLevel.Verbose);
             }
+
+            if (IsFrom("Microsoft.AspNetCore.Hosting.Internal.WebHost", logEvent))
+            {
+                _logLevelBackingField.SetValue(logEvent, LogEventLevel.Verbose);
+            }
         }
 
         private static bool IsFrom<T>(LogEvent logEvent)
+        {
+            var sourceContext = typeof(T).FullName;
+
+            return IsFrom(sourceContext, logEvent);
+        }
+
+        private static bool IsFrom(string sourceContext, LogEvent logEvent)
         {
             if (!logEvent.Properties.TryGetValue("SourceContext", out var value)) return false;
 
@@ -51,7 +63,7 @@ namespace Census.Api.Infrastructure.Logging
             var stringValue = scalarValue.Value as string;
             if (stringValue == null) return false;
 
-            if (stringValue.Contains(typeof(T).FullName)) return true;
+            if (stringValue.Contains(sourceContext)) return true;
             return false;
         }
     }

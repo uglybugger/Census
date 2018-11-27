@@ -14,6 +14,7 @@ namespace Census.Api.Infrastructure.Logging
 
             Log.Logger = new LoggerConfiguration()
                          .MinimumLevel.ControlledBy(controlLevelSwitch)
+                         .Enrich.FromLogContext()
                          .Enrich.WithProperty("ApplicationName", applicationSettings.Name)
                          .Enrich.WithProperty("ApplicationVersion", typeof(LogBootstrapper).Assembly.GetName().Version)
                          .Enrich.With<FrameworkSpamReductionEnricher>()

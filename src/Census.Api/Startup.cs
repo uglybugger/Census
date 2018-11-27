@@ -28,7 +28,11 @@ namespace Census.Api
         {
             services.AddCors();
 
-            services.AddMvc(options => { options.Filters.Add<CosmosRateLimitFilter>(); })
+            services.AddMvc(options =>
+            {
+                options.Filters.Add<RequestTimerFilter>();
+                options.Filters.Add<CosmosRateLimitFilter>();
+            })
                     .SetCompatibilityVersion(CompatibilityVersion.Latest)
                     .AddControllersAsServices()
                 ;
@@ -41,7 +45,7 @@ namespace Census.Api
                                                        options.InvalidModelStateResponseFactory = InvalidModelStateResponseFactory.CreateResponse;
                                                    });
 
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "Hipster Census API", Version = "v1"}); });
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info { Title = "Hipster Census API", Version = "v1" }); });
 
             var appSettingsRoot = _configuration.Get<AppSettingsRoot>();
             _container = IoC.LetThereBeIoC(services, appSettingsRoot);
