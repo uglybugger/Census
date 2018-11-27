@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using System.Threading.Tasks;
 using Census.Api.Infrastructure.Mediator;
 using Census.Api.Infrastructure.Persistence;
@@ -17,10 +18,18 @@ namespace Census.Api.Domain.Features.CensusSubmission
             _repository = repository;
         }
 
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public async Task Handle(SubmitCensusCommand command, CancellationToken cancellationToken)
         {
             var dto = command.CompletedCensus;
-            var censusForm = new CensusForm(dto.Id, dto.AccessToken, dto.BeardLength, dto.GearInches);
+            var censusForm = new CensusForm(dto.Id.Value,
+                                            dto.AccessToken,
+                                            dto.LegalName,
+                                            dto.BaristaName,
+                                            dto.BeardLength.Value,
+                                            dto.GearInches.Value,
+                                            dto.BeerBitterness.Value,
+                                            dto.FavouriteBand);
             await _repository.Add(censusForm);
 
             await _mediator.Publish(new CensusSubmittedEvent(dto), cancellationToken);
