@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import Page from './Page';
 import accessTokens from './accessTokens.json';
+import configuration from '../../config.json';
 
 class AboutPage extends Page {
 
@@ -8,6 +9,7 @@ class AboutPage extends Page {
         return (
             <div>
                 <h1>About</h1>
+                <p>There are <a target="_blank" rel="noopener noreferrer" href={configuration.Api.Endpoint+"swagger/index.html"}>Swagger docs</a> in case you'd like to have a stickybeak at the API surface.</p>
                 <p>
                     Here's how to create an API client and lodge your own census.
                 </p>
