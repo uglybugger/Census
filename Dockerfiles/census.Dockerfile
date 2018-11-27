@@ -2,7 +2,6 @@ FROM node:9.6.1 as build
 ARG BUILD_NUMBER=0.0.0
 
 WORKDIR /src
-COPY src/census/nginx.conf /etc/nginx/nginx.conf
 COPY src/census/ ./
 
 RUN mv -f ./src/config.docker.json ./src/config.json
@@ -12,6 +11,7 @@ RUN npm run build
 
 FROM nginx:1.13.9-alpine AS base
 FROM base AS census
+COPY --from=build /src/nginx.default.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /src/build /usr/share/nginx/html
 COPY --from=build /src/run.sh /
 COPY --from=build /src/envsubst.sh /
