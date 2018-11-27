@@ -7,7 +7,7 @@ COPY src/census/ ./
 
 RUN mv -f ./src/config.docker.json ./src/config.json
 RUN echo {\"Version\":\"${BUILD_NUMBER}\"} > ./src/version.json
-RUN npm install
+RUN npm install --silent
 RUN npm run build
 
 FROM nginx:1.13.9-alpine AS base
