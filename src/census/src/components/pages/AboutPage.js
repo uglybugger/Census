@@ -8,24 +8,41 @@ class AboutPage extends Page {
         return (
             <div>
                 <h1>About</h1>
-                <h2>Test harness</h2>
                 <p>
-                    Here's how to create an API client and lodge your own census:
+                    Here's how to create an API client and lodge your own census.
+                </p>
+                <p>
+                    Create a new console application, then install the client library NuGet package:
+                </p>
+                <pre>
+                    {AboutPage.nugetInstallationSampleCode}
+                </pre>
+                <p>
+                    Copy and paste the code below into your Program.cs.
                 </p>
                 <pre>
                     {AboutPage.sampleCode}
                 </pre>
 
-                <h2>Access tokens</h2>
                 <p>Each hipster citizen has been issued with a unique access token via snail mail.</p>
-                <p>Below is an additional collection of valid access tokens. You may use the access codes or generate your own.</p>
+                <p>Below is an additional collection of valid access tokens. You may use the access tokens or generate your own - just replace the all-zeroes code with any one of these.</p>
                 <pre>
-                    {JSON.stringify(accessTokens)}
+                    {AboutPage.accessTokens}
                 </pre>
+                <p>
+                    You're all set to go. Hit F5 and see what happens :)
+                </p>
             </div>
         );
     }
 }
+
+AboutPage.accessTokens = JSON.stringify(accessTokens);
+
+AboutPage.nugetInstallationSampleCode = `
+Install-Package Census.Client -Source https://www.myget.org/F/census-client/api/v3/index.json
+
+`;
 
 AboutPage.sampleCode = `
 class Program
@@ -65,6 +82,7 @@ class Program
         }
     }
 }
+
 `;
 
 AboutPage.propTypes = {
