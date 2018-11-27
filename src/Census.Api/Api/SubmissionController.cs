@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Census.Api.Infrastructure.Mediator;
 using Census.Contracts.Contracts;
+using Census.Contracts.Contracts.Submission;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Census.Api.Api

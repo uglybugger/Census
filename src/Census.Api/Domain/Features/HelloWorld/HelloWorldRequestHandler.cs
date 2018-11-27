@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Census.Api.Infrastructure.Mediator;
 using Census.Contracts;
 using Census.Contracts.Contracts;
+using Census.Contracts.Contracts.HelloWorld;
 
 namespace Census.Api.Domain.Features.HelloWorld
 {

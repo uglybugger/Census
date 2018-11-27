@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Census.Contracts.HttpRequestRouting.Attributes;
 
-namespace Census.Contracts.Contracts
+namespace Census.Contracts.Contracts.Submission
 {
     [Post(RouteTemplate)]
     public class SubmitCensusCommand : ICommand

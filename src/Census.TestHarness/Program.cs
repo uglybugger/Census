@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Census.Client;
 using Census.Contracts.Contracts;
+using Census.Contracts.Contracts.Submission;
 
 namespace Census.TestHarness
 {

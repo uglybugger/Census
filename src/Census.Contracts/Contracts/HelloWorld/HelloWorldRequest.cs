@@ -1,4 +1,4 @@
-﻿namespace Census.Contracts.Contracts
+﻿namespace Census.Contracts.Contracts.HelloWorld
 {
     public class HelloWorldRequest : IRequest<HelloWorldRequest, HelloWorldResponse>
     {

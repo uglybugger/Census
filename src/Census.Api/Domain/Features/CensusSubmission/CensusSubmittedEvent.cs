@@ -1,5 +1,6 @@
 ﻿using Census.Contracts;
 using Census.Contracts.Contracts;
+using Census.Contracts.Contracts.Submission;
 
 namespace Census.Api.Domain.Features.CensusSubmission
 {

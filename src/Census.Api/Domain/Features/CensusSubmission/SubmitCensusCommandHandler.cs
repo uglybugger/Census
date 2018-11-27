@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Census.Api.Infrastructure.Mediator;
 using Census.Api.Infrastructure.Persistence;
 using Census.Contracts.Contracts;
+using Census.Contracts.Contracts.Submission;
 
 namespace Census.Api.Domain.Features.CensusSubmission
 {

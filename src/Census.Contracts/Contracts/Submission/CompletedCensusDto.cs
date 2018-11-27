@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Census.Contracts.Validation.Attributes;
 
-namespace Census.Contracts.Contracts
+namespace Census.Contracts.Contracts.Submission
 {
     public class CompletedCensusDto
     {
