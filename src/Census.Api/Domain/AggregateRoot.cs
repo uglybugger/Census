@@ -21,7 +21,7 @@ namespace Census.Api.Domain
             protected set
             {
                 _id = value;
-                PartitionKey = value.GetHashCode() % 10;
+                PartitionKey = Math.Abs(value.GetHashCode()) % 10;
             }
         }
 
