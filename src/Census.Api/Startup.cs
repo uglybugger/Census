@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Census.Api.AppSettings;
+using Census.Api.Infrastructure.ActionFilters;
 using Census.Api.Infrastructure.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,7 +28,7 @@ namespace Census.Api
         {
             services.AddCors();
 
-            services.AddMvc()
+            services.AddMvc(options => { options.Filters.Add<CosmosRateLimitFilter>(); })
                     .SetCompatibilityVersion(CompatibilityVersion.Latest)
                     .AddControllersAsServices()
                 ;

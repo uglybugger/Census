@@ -18,7 +18,7 @@ namespace Census.Api.Api
 
         [HttpPost]
         [Route(SubmitCensusCommand.RouteTemplate)]
-        public async Task<IActionResult> Submit([FromBody]SubmitCensusCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> Submit([FromBody] SubmitCensusCommand command, CancellationToken cancellationToken)
         {
             await _mediator.Send(command, cancellationToken);
             return new EmptyResult();
