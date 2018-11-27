@@ -14,10 +14,10 @@ namespace Census.Api.AutofacModules
                 .AsImplementedInterfaces()
                 .OnActivated(args =>
                 {
-                    var logger = args.Context.Resolve<ILogger>();
-                    args.Instance.CommandSent += (sender, e) => logger.Information("Command {MessageType} sent", e.Command.GetType().FullName);
-                    args.Instance.EventPublished += (sender, e) => logger.Information("Event {MessageType} published", e.Event.GetType().FullName);
-                    args.Instance.ResponseReturned += (sender, e) => logger.Information("Response {MessageType} returned", e.Response.GetType().FullName);
+                    var logger = args.Context.Resolve<ILogger>().ForContext<AutofacMediator>();
+                    args.Instance.CommandSent += (sender, e) => logger.Verbose("Command {MessageType} sent", e.Command.GetType().FullName);
+                    args.Instance.EventPublished += (sender, e) => logger.Verbose("Event {MessageType} published", e.Event.GetType().FullName);
+                    args.Instance.ResponseReturned += (sender, e) => logger.Verbose("Response {MessageType} returned", e.Response.GetType().FullName);
                 })
                 .InstancePerLifetimeScope();
 
