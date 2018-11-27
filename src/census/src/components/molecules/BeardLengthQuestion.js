@@ -25,6 +25,7 @@ class BeardLengthQuestion extends Component {
                 answer={this.props.answer}
                 validate={this.validate}
                 onAnswerChanged={this.props.onAnswerChanged}
+                isReadOnly={false}
             />
         );
     }

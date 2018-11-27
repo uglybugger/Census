@@ -2,10 +2,14 @@
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import uuid from 'uuid';
+import { Logger } from 'structured-log';
 import AccessTokenQuestion from '../molecules/AccessTokenQuestion';
+import LegalNameQuestion from '../molecules/LegalNameQuestion';
+import BaristaNameQuestion from '../molecules/BaristaNameQuestion';
 import GearInchesQuestion from '../molecules/GearInchesQuestion';
 import BeardLengthQuestion from '../molecules/BeardLengthQuestion';
 import BeerBitternessQuestion from '../molecules/BeerBitternessQuestion';
+import FavouriteBandQuestion from '../molecules/FavouriteBandQuestion';
 
 class CensusForm extends Component {
 
@@ -17,9 +21,12 @@ class CensusForm extends Component {
             submission: {
                 id: uuid(),
                 accessToken: '13a7-7f24-0000-0009',
-                beardLength: 0,
+                legalName: 'Unique Hipster',
+                baristaName: 'Geoff',
+                beardLength: 100,
                 gearInches: 120,
-                beerBitterness: 5
+                beerBitterness: 5,
+                favouriteBand: "You've never heard of them."
             }
         };
 
@@ -41,9 +48,14 @@ class CensusForm extends Component {
     }
 
     async handleSubmit(e) {
+        if (!this.canSubmit()) return;
+        
         try {
             this.setState({ isLoading: true });
             await this.props.submit(this.state.submission);
+        } catch (ex) {
+            this.props.logger.error(ex);
+            alert("Your census form could not be lodged right now. Please try again or come back later.")
         } finally {
             this.setState({ isLoading: false });
         }
@@ -55,6 +67,16 @@ class CensusForm extends Component {
                 <form>
                     <AccessTokenQuestion
                         answer={this.state.submission.accessToken}
+                        onAnswerChanged={this.handleAnswerChanged}
+                    />
+
+                    <LegalNameQuestion
+                        answer={this.state.submission.legalName}
+                        onAnswerChanged={this.handleAnswerChanged}
+                    />
+
+                    <BaristaNameQuestion
+                        answer={this.state.submission.baristaName}
                         onAnswerChanged={this.handleAnswerChanged}
                     />
 
@@ -73,6 +95,11 @@ class CensusForm extends Component {
                         onAnswerChanged={this.handleAnswerChanged}
                     />
 
+                    <FavouriteBandQuestion
+                        answer={this.state.submission.favouriteBand}
+                        onAnswerChanged={this.handleAnswerChanged}
+                    />
+
                     <Button bsStyle="primary" onClick={this.canSubmit() ? this.handleSubmit : null} disabled={!this.canSubmit()}>Submit my census</Button>
                 </form>
                 <div>
@@ -84,7 +111,8 @@ class CensusForm extends Component {
 }
 
 CensusForm.propTypes = {
-    submit: PropTypes.func.isRequired
+    submit: PropTypes.func.isRequired,
+    logger: PropTypes.instanceOf(Logger).isRequired
 };
 
 export default CensusForm;

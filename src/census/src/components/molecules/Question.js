@@ -47,7 +47,7 @@ class Question extends Component {
                         validationState={this.state.validation.state}
                     >
                         <ControlLabel>{this.props.question}</ControlLabel>
-                        <FormControl type={this.props.inputType} value={this.props.answer} placeholder={this.props.placeholder} onChange={this.handleChange} />
+                        <FormControl type={this.props.inputType} value={this.props.answer} placeholder={this.props.placeholder} readOnly={this.props.isReadOnly} onChange={this.handleChange} />
                         <FormControl.Feedback />
                         <HelpBlock>{this.state.validation.message}</HelpBlock>
                     </FormGroup>
@@ -63,7 +63,8 @@ Question.propTypes = {
     inputType: PropTypes.string.isRequired,
     onAnswerChanged: PropTypes.func.isRequired,
     validate: PropTypes.func.isRequired,
-    answer: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
+    answer: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool]),
+    isReadOnly: PropTypes.bool.isRequired
 };
 
 export default compose(observer)(Question);

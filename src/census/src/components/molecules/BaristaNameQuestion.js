@@ -2,8 +2,7 @@
 import Question from './Question'
 import PropTypes from 'prop-types';
 
-// https://www.thebrewenthusiast.com/ibus/
-class BeerBitternessQuestion extends Component {
+class BaristaNameQuestion extends Component {
     constructor(props) {
         super(props);
 
@@ -11,18 +10,17 @@ class BeerBitternessQuestion extends Component {
     }
 
     validate(value) {
-        if (value < 5) return { validationState: "error", message: "That's water. Not beer. Be serious." };
-        if (value > 120) return { validationState: "error", message: "While that IBU value is theoretically possible, we don't believe you." };
+        if (!value) return { validationState: "error", message: "Come on. You at least *tallk* to your barista, don't you?" };
         return { validationState: "success", message: null };
     }
 
     render() {
         return (
             <Question
-                fieldName="beerBitterness"
-                question="What was the IBU rating of your last batch of home-brew?"
-                inputType="number"
-                placeholderText="What was the IBU rating of your last batch of home-brew?"
+                fieldName="baristaName"
+                question="By what name does your second-favourite barista know you?"
+                inputType="text"
+                placeholderText="John"
                 answer={this.props.answer}
                 validate={this.validate}
                 onAnswerChanged={this.props.onAnswerChanged}
@@ -32,10 +30,10 @@ class BeerBitternessQuestion extends Component {
     }
 }
 
-BeerBitternessQuestion.propTypes = {
+BaristaNameQuestion.propTypes = {
     onAnswerChanged: PropTypes.func.isRequired,
     answer: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.bool])
 };
 
 
-export default BeerBitternessQuestion;
+export default BaristaNameQuestion;

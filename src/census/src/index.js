@@ -11,13 +11,14 @@ import configuration from './config.json';
 import version from './version.json';
 
 var logBootstrapper = new LogBootstrapper(configuration, version);
-logBootstrapper.bootstrap();
+var logger = logBootstrapper.bootstrap();
 var apiClient = new ApiClient(configuration);
 
 var stores = {
     apiClient: apiClient,
     configuration: configuration,
-    version: version
+    version: version,
+    logger: logger
 };
 
 spy((event) => {

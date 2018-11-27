@@ -8,6 +8,7 @@ import Page from './Page';
 import CensusForm from '../organisms/CensusForm';
 import ApiClient from '../../infrastructure/api/ApiClient';
 import SubmitCensusCommand from '../../services/SubmitCensusCommand';
+import { Logger } from 'structured-log';
 
 class CensusDataEntryPage extends Page {
 
@@ -25,13 +26,17 @@ class CensusDataEntryPage extends Page {
 
     render() {
         return (
-            <CensusForm submit={this.submit} />
+            <CensusForm
+                submit={this.submit}
+                logger={this.props.logger}
+            />
         );
     }
 }
 
 CensusDataEntryPage.propTypes = {
-    apiClient: PropTypes.instanceOf(ApiClient).isRequired
+    apiClient: PropTypes.instanceOf(ApiClient).isRequired,
+    logger: PropTypes.instanceOf(Logger).isRequired
 };
 
-export default compose(inject('apiClient'), observer)(CensusDataEntryPage);
+export default compose(inject('apiClient', 'logger'), observer)(CensusDataEntryPage);

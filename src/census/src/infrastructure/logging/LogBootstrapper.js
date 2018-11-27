@@ -12,14 +12,6 @@ class LogBootstrapper {
 
     bootstrap() {
 
-        this.undecoratedConsole = {
-            log: console.log,
-            debug: console.debug,
-            info: console.info,
-            warn: console.warn,
-            error: console.error
-        };
-
         var levelSwitch = new StructuredLog.DynamicLevelSwitch(this.configuration.Logging.LogEventLevel)
 
         var consoleSink = new StructuredLog.ConsoleSink({
@@ -45,13 +37,9 @@ class LogBootstrapper {
             .writeTo(seqSink)
             .create();
 
-        console.log = logger.debug.bind(logger);
-        console.debug = logger.debug.bind(logger);
-        console.info = logger.info.bind(logger);
-        console.warn = logger.warn.bind(logger);
-        console.error = logger.error.bind(logger);
+        logger.info("Application online");
 
-        console.info("Application online");
+        return logger;
     }
 }
 
