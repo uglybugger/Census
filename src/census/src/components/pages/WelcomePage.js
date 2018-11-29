@@ -8,7 +8,7 @@ class WelcomePage extends Page {
     render() {
         return (
             <div>
-                <Jumbotron>
+                <Jumbotron style={{"background-color":"#ffa500"}}>
                     <Grid>
                         <Row>
                             <Col sm={8} style={{ "text-align": "center" }}>
