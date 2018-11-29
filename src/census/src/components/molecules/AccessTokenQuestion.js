@@ -10,6 +10,7 @@ class AccessTokenQuestion extends Component {
     }
 
     validate(value) {
+        if (!value) return {validationState: "error", message: "You must input the access token you were sent via snail mail."};
         return { validationState: "success", message: null };
     }
 

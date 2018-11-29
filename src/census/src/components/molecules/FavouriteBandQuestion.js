@@ -10,6 +10,7 @@ class FavouriteBandQuestion extends Component {
     }
 
     validate(value) {
+        if (!value) return {validationState: "error", message: "Hipsters listen to music."};
         return { validationState: "success", message: null };
     }
 

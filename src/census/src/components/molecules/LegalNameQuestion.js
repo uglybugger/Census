@@ -10,6 +10,7 @@ class LegalNameQuestion extends Component {
     }
 
     validate(value) {
+        if (!value) return {validationState: "error", message: "You must have a name. Seriously."};
         return { validationState: "success", message: null };
     }
 

@@ -20,12 +20,12 @@ class CensusForm extends Component {
             isLoading: false,
             submission: {
                 id: uuid(),
-                accessToken: '13a7-7f24-0000-0009',
-                legalName: 'Unique Hipster',
-                baristaName: 'Geoff',
-                beardLength: 100,
-                gearInches: 120,
-                beerBitterness: 5,
+                accessToken: undefined,
+                legalName: undefined,
+                baristaName: undefined,
+                beardLength: undefined,
+                gearInches: undefined,
+                beerBitterness: undefined,
                 favouriteBand: "You've never heard of them."
             }
         };
@@ -44,7 +44,17 @@ class CensusForm extends Component {
     }
 
     canSubmit() {
-        return !this.state.isLoading;
+        if (this.state.isLoading) return false;
+        if (!this.state.submission.id) return false;
+        if (!this.state.submission.accessToken) return false;
+        if (!this.state.submission.legalName) return false;
+        if (!this.state.submission.baristaName) return false;
+        if (!this.state.submission.beardLength) return false;
+        if (!this.state.submission.gearInches) return false;
+        if (!this.state.submission.beerBitterness) return false;
+        if (!this.state.submission.favouriteBand) return false;
+
+        return true;
     }
 
     async handleSubmit(e) {
