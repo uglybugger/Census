@@ -11,9 +11,9 @@ class WelcomePage extends Page {
                 <Jumbotron>
                     <Grid>
                         <Row>
-                            <Col sm={8}>
+                            <Col sm={8} style={{ "text-align": "center" }}>
                                 <h1>The Great Hipster Census of 2018</h1>
-                                <p>Of course you knew about it <em>before</em> it was cool.</p>
+                                <p>Trolling hipsters since <em>before</em> it was cool.</p>
                             </Col>
                             <Col sm={4}>
                                 <Image src={logo} responsive />
